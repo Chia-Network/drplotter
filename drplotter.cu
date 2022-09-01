@@ -27,7 +27,8 @@
 #include "chia/chacha8.h"
 #include "nick_globals.hpp"
 #include "attack.hpp"
-//#include "phase2.hpp"
+#include "phase2.hpp"
+
 
 
 const uint16_t THREADS_FOR_MATCHING = 256; // 386 is 10600ms matching. 256 is 9761ms matching. 237 is...10109
@@ -36,20 +37,26 @@ int cmd_read = 0;
 
 using milli = std::chrono::milliseconds;
 int64_t total_gpu_time_ms = 0;
-int64_t total_transfer_time_ms = 0;
+int64_t total_transfer_in_time_ms = 0;
+int64_t total_transfer_out_time_ms = 0;
 int64_t total_chacha_time_ms = 0;
 int64_t total_match_time_ms = 0;
-uint64_t total_transfered_bytes = 0;
+uint64_t total_transfer_in_bytes = 0;
+uint64_t total_transfer_out_bytes = 0;
 int64_t table_gpu_time_ms = 0;
-int64_t table_transfer_time_ms = 0;
+int64_t table_transfer_in_time_ms = 0;
+int64_t table_transfer_out_time_ms = 0;
 int64_t table_match_time_ms = 0;
-uint64_t table_transfered_bytes = 0;
+uint64_t table_transfer_in_bytes = 0;
+uint64_t table_transfer_out_bytes = 0;
 
 // global memory
 char *host_criss_cross_blocks; // aka host_meta_blocks
 char *host_refdata_blocks;
 char *device_buffer_A;
 char *device_buffer_B;
+
+char *device_buffer_C;
 char *device_buffer_T3_base;
 char *device_buffer_refdata;
 
@@ -584,25 +591,23 @@ void gpu_find_tx_matches(uint16_t table, uint32_t batch_id, uint32_t start_kbc_L
 	}
 	__syncthreads(); // all written initialize data should sync
 
-	//bool printandquit = ((global_kbc_L_bucket_id == 75000));
 
+	/*bool printandquit = ((global_kbc_L_bucket_id == 0));
+		if (printandquit) {
+			if (threadIdx.x == 0) {
 
-
-
-	//	if (printandquit) {
-			//printf("R_y list:\n");
-			//for (size_t pos_R = 0; pos_R < num_R; pos_R++) {
-			//	uint16_t r_y = kbc_R_entries[pos_R].y;
-			//	printf("%u\n",r_y);
-			//}
-			//if (threadIdx.x == 0) {
-			//	printf("L_y list num %u:\n", num_L);
-			//	for (size_t pos_L = 0; pos_L < num_L; pos_L++) {
-			//		uint16_t l_y = kbc_L_entries[pos_L].y;
-			//		printf("%u\n",l_y);
-			//	}
-			//}
-	//	}
+				printf("R_y list:\n");
+				for (size_t pos_R = 0; pos_R < num_R; pos_R++) {
+					uint16_t r_y = kbc_R_entries[pos_R].y;
+					printf("[x:%u y:%u]\n",kbc_R_entries[pos_R].meta[0], r_y);
+				}
+				printf("L_y list num %u:\n", num_L);
+				for (size_t pos_L = 0; pos_L < num_L; pos_L++) {
+					uint16_t l_y = kbc_L_entries[pos_L].y;
+					printf("[x:%u y:%u]\n",kbc_L_entries[pos_L].meta[0], l_y);
+				}
+			}
+		}*/
 	//__syncthreads();
 	uint16_t parity = global_kbc_L_bucket_id % 2;
 
@@ -923,7 +928,9 @@ void gpu_find_tx_matches(uint16_t table, uint32_t batch_id, uint32_t start_kbc_L
 
 	if ((doPrint >=1) && (threadIdx.x == 0)) {
 		//if ((doPrint > 0) && (global_kbc_L_bucket_id < 10 == 0)) printf(" matches kbc bucket: %u num_L:%u num_R:%u pairs:%u\n", global_kbc_L_bucket_id, num_L, num_R, total_matches);
-		if ((global_kbc_L_bucket_id % 1000000 == 0)) printf(" matches kbc bucket: %u num_L:%u num_R:%u pairs:%u\n", global_kbc_L_bucket_id, num_L, num_R, total_matches);
+
+		if ((global_kbc_L_bucket_id % 1000000 == 0) || (global_kbc_L_bucket_id < 10)) printf(" matches kbc bucket: %u num_L:%u num_R:%u pairs:%u\n", global_kbc_L_bucket_id, num_L, num_R, total_matches);
+
 
 	}
 	/*
@@ -2659,7 +2666,28 @@ void gpu_find_tx_matches_orig(uint16_t table, uint32_t batch_id, uint32_t start_
 { \
 	uint64_t y = (((uint64_t) chacha_y) << 6) + (x >> 26); \
 	uint32_t kbc_bucket_id = uint32_t (y / kBC); \
+	for (int j=0;j<64;j++) { \
+		if (include_xs[j] == (x+i)) { printf("including x %u\n", (x+i)); \
 	if ((kbc_bucket_id >= KBC_START) && (kbc_bucket_id <= KBC_END)) { \
+		uint32_t local_kbc_bucket_id = kbc_bucket_id - KBC_START; \
+		int slot = atomicAdd(&kbc_local_num_entries[local_kbc_bucket_id],1); \
+		F1_Bucketed_kBC_Entry entry = { (x+i), (uint32_t) (y % kBC) }; \
+		if (slot >= KBC_MAX_ENTRIES_PER_BUCKET) { printf("ERROR KBC OVERFLOW MAX:%u actual:%u", KBC_MAX_ENTRIES_PER_BUCKET, slot); } \
+		uint32_t entries_address = local_kbc_bucket_id * KBC_MAX_ENTRIES_PER_BUCKET + slot; \
+		kbc_local_entries[entries_address] = entry; \
+	} \
+	} } \
+}
+
+//if ((x + i) < 256) { printf("x: %u  y:%llu  kbc:%u\n", (x+i), y, kbc_bucket_id); }
+//if (((x+i) % (1024*1024)) == 0) { printf("x: %u  chacha: %u y:%llu  kbc:%u\n", (x+i), chacha_y, y, kbc_bucket_id); }
+//if (kbc_bucket_id == 0) { printf("x: %u  chacha: %u y:%llu  kbc:%u\n", (x+i), chacha_y, y, kbc_bucket_id); }
+
+#define KBCFILTER(chacha_y,i) \
+{ \
+	uint64_t y = (((uint64_t) chacha_y) << 6) + (x >> 26); \
+	uint32_t kbc_bucket_id = uint32_t (y / kBC); \
+if ((kbc_bucket_id >= KBC_START) && (kbc_bucket_id <= KBC_END)) { \
 		uint32_t local_kbc_bucket_id = kbc_bucket_id - KBC_START; \
 		int slot = atomicAdd(&kbc_local_num_entries[local_kbc_bucket_id],1); \
 		F1_Bucketed_kBC_Entry entry = { (x+i), (uint32_t) (y % kBC) }; \
@@ -2688,7 +2716,8 @@ void gpu_chacha8_get_k32_keystream_into_local_kbc_entries(const uint32_t N,
 	                             2438113590,3028543211,3993396297,2678430597,458920999,889121073,3577485087,1822568056,
 	                             2222781147,1942400192,195608354,1460166215,2544813525,3231425778,2958837604,2710532969};*/
 
-	for (uint32_t x_group = index; x_group <= end_n; x_group += stride) {
+	uint32_t x_group = index;
+	//for (uint32_t x_group = index; x_group <= end_n; x_group += stride) {
 		uint32_t x = x_group << 4;//  *16;
 		uint32_t pos = x_group;
 
@@ -2705,7 +2734,7 @@ void gpu_chacha8_get_k32_keystream_into_local_kbc_entries(const uint32_t N,
 
 		x0 += input[0];x1 += input[1];x2 += input[2];x3 += input[3];x4 += input[4];
 		x5 += input[5];x6 += input[6];x7 += input[7];x8 += input[8];x9 += input[9];
-		x10 += input[10];x11 += input[11];x12 += x_group; // j12;//x13 += 0;
+		x10 += input[10];x11 += input[11];x12 += pos; // j12;//x13 += 0;
 		x14 += input[14];x15 += input[15];
 
 		// convert to little endian/big endian whatever, chia needs it like this
@@ -2719,7 +2748,7 @@ void gpu_chacha8_get_k32_keystream_into_local_kbc_entries(const uint32_t N,
 		KBCFILTER(x4,4);KBCFILTER(x5,5);KBCFILTER(x6,6);KBCFILTER(x7,7);
 		KBCFILTER(x8,8);KBCFILTER(x9,9);KBCFILTER(x10,10);KBCFILTER(x11,11);
 		KBCFILTER(x12,12);KBCFILTER(x13,13);KBCFILTER(x14,14);KBCFILTER(x15,15);
-	}
+	//}
 }
 
 __global__
@@ -2945,7 +2974,7 @@ transfer time: 54805 ms
 		CUDA_CHECK_RETURN(cudaDeviceSynchronize());
 
 		device_bytes_start += bytes_to_copy;
-		table_transfered_bytes += bytes_to_copy;
+		table_transfer_in_bytes += bytes_to_copy;
 	}
 	//std::cout << "\nTotal entries copied in batch " << batch_id << ": " << total_entries_copied << std::endl;
 }
@@ -3184,7 +3213,6 @@ void transferBucketedBlocksFromDeviceToHost(const uint16_t table, const uint32_t
 			// we only copy criss cross memory if it's not the last table, since that only exports back ref data and no forward propagation.
 			CUDA_CHECK_RETURN(cudaMemcpy(&host_criss_cross_blocks[host_bytes_start],&device_buffer[device_bytes_start],bytes_to_copy,cudaMemcpyDeviceToHost));
 			CUDA_CHECK_RETURN(cudaDeviceSynchronize());
-			total_transfered_bytes += bytes_to_copy;
 			batch_bytes_transfered += bytes_to_copy;
 		}
 		if (doPrint) std::cout << "   done.\n";
@@ -3257,6 +3285,7 @@ void transferBucketedBlocksFromDeviceToHost(const uint16_t table, const uint32_t
 	//for(uint8_t i=0;i<BATCHES;i++) { threads[i].join(); std::cout << "[" << i << "]";}
 
 	if (doPrint) std::cout << "\nTotal bytes for batch copied: " << batch_bytes_transfered << std::endl;
+	table_transfer_out_bytes += batch_bytes_transfered;
 }
 
 
@@ -3332,7 +3361,7 @@ void doT1Batch(uint32_t batch_id, int* local_kbc_num_entries, const uint32_t KBC
 	start = std::chrono::high_resolution_clock::now();
 	transferBucketedBlocksFromDeviceToHost(1, batch_id, device_buffer_B, sizeof(Tx_Bucketed_Meta2), NULL, device_block_entry_counts);
 	finish = std::chrono::high_resolution_clock::now();
-	total_transfer_time_ms += std::chrono::duration_cast<milli>(finish - start).count();
+	table_transfer_out_time_ms += std::chrono::duration_cast<milli>(finish - start).count();
 	//std::cout << "   done. " << std::chrono::duration_cast<milli>(finish - start).count() << " ms\n";
 }
 
@@ -3374,7 +3403,7 @@ void doTxBatch(uint16_t table, uint32_t batch_id) {
 	start = std::chrono::high_resolution_clock::now();
 	transferBlocksFromHostToDevice(table, batch_id, device_buffer_B, device_buffer_A, transfer_in_size);
 	finish = std::chrono::high_resolution_clock::now();
-	table_transfer_time_ms += std::chrono::duration_cast<milli>(finish - start).count();
+	table_transfer_in_time_ms += std::chrono::duration_cast<milli>(finish - start).count();
 
 	//gpu_print_kbc_counts<<<1,1>>>(device_local_kbc_num_entries);
 
@@ -3441,7 +3470,9 @@ void doTxBatch(uint16_t table, uint32_t batch_id) {
 		transferBucketedBlocksFromDeviceToHost(table, batch_id, device_buffer_B, transfer_out_size, device_buffer_refdata, device_block_entry_counts);
 		CUDA_CHECK_RETURN(cudaDeviceSynchronize());
 		finish = std::chrono::high_resolution_clock::now();
-		table_transfer_time_ms += std::chrono::duration_cast<milli>(finish - start).count();
+
+		table_transfer_out_time_ms += std::chrono::duration_cast<milli>(finish - start).count();
+
 		//std::cout << "   done. " << std::chrono::duration_cast<milli>(finish - start).count() << " ms\n";
 	//} else if (table == 6) {
 		// TODO: handle final T6 file...maybe this can write into hostmem instead of to file.
@@ -3476,9 +3507,14 @@ void doT1() {
 	std::cout << "       chacha: " << total_chacha_time_ms << " ms\n";
 	std::cout << "        match: " << total_match_time_ms << " ms\n";
 	std::cout << "   ----------  " << std::endl;
-	std::cout << "transfer time: " << total_transfer_time_ms << " ms\n";
-	std::cout << "        bytes: " << total_transfered_bytes << " (" << (total_transfered_bytes/(1024*1024*1024)) << "GB)\n";
+	std::cout << "transfer time: " << table_transfer_out_time_ms << " ms\n";
+	std::cout << "        bytes: " << table_transfer_out_bytes << " (" << (table_transfer_out_bytes/(1024*1024*1024)) << "GB)\n";
 	std::cout << "*********************" << std::endl;
+
+	total_transfer_in_time_ms += table_transfer_in_time_ms;
+	total_transfer_out_time_ms += table_transfer_out_time_ms;
+	total_transfer_in_bytes += table_transfer_in_bytes;
+	total_transfer_out_bytes += table_transfer_out_bytes;
 }
 
 void doTx(uint16_t table) {
@@ -3488,8 +3524,10 @@ void doTx(uint16_t table) {
 	auto finish =  std::chrono::high_resolution_clock::now(); // just to allocate
 
 	table_match_time_ms = 0;
-	table_transfer_time_ms = 0;
-	table_transfered_bytes = 0;
+	table_transfer_in_time_ms = 0;
+	table_transfer_out_time_ms = 0;
+	table_transfer_in_bytes = 0;
+	table_transfer_out_bytes = 0;
 
 	for (uint32_t batch_id = 0; batch_id < BATCHES; batch_id++) {
 		auto batch_start = std::chrono::high_resolution_clock::now();
@@ -3503,12 +3541,16 @@ void doTx(uint16_t table) {
 	std::cout << "T" << table << " time: " << std::chrono::duration_cast<milli>(finish - total_start).count() << " ms\n";
 	std::cout << "        match: " << table_match_time_ms << " ms\n";
 	std::cout << "   ----------  " << std::endl;
-	std::cout << "transfer time: " << table_transfer_time_ms << " ms\n";
-	std::cout << "        bytes: " << table_transfered_bytes << " (" << (table_transfered_bytes/(1024*1024*1024)) << "GB)\n";
+	std::cout << "transfer in time: " << table_transfer_in_time_ms << " ms\n";
+	std::cout << "         in bytes: " << table_transfer_in_bytes << " (" << (table_transfer_in_bytes/(1024*1024*1024)) << "GB)\n";
+	std::cout << "transfer out time: " << table_transfer_out_time_ms << " ms\n";
+	std::cout << "        out bytes: " << table_transfer_out_bytes << " (" << (table_transfer_out_bytes/(1024*1024*1024)) << "GB)\n";
 	std::cout << "*********************" << std::endl;
 	total_match_time_ms += table_match_time_ms;
-	total_transfer_time_ms += table_transfer_time_ms;
-	total_transfered_bytes += table_transfered_bytes;
+	total_transfer_in_time_ms += table_transfer_in_time_ms;
+	total_transfer_out_time_ms += table_transfer_out_time_ms;
+	total_transfer_in_bytes += table_transfer_in_bytes;
+	total_transfer_out_bytes += table_transfer_out_bytes;
 }
 
 
@@ -3532,6 +3574,10 @@ void setupMemory() {
 	std::cout << "      device_buffer_B " << DEVICE_BUFFER_ALLOCATED_ENTRIES << " * (UNIT BYTES:" <<  DEVICE_BUFFER_UNIT_BYTES << ") = " << DEVICE_BUFFER_ALLOCATED_BYTES << std::endl;
 	CUDA_CHECK_RETURN(cudaMalloc(&device_buffer_B, DEVICE_BUFFER_ALLOCATED_BYTES));
 
+
+	std::cout << "      device_buffer_C " << DEVICE_BUFFER_ALLOCATED_ENTRIES << " * (UNIT BYTES:" <<  DEVICE_BUFFER_UNIT_BYTES << ") = " << DEVICE_BUFFER_ALLOCATED_BYTES << std::endl;
+	CUDA_CHECK_RETURN(cudaMalloc(&device_buffer_C, DEVICE_BUFFER_ALLOCATED_BYTES));
+
 	std::cout << "      device_buffer_refdata " << DEVICE_BUFFER_ALLOCATED_ENTRIES << " * (UNIT BYTES:" <<  BACKREF_UNIT_BYTES << ") = " << BACKREF_ALLOCATED_BYTES << std::endl;
 	CUDA_CHECK_RETURN(cudaMalloc(&device_buffer_refdata, BACKREF_ALLOCATED_BYTES));
 
@@ -3548,6 +3594,7 @@ void freeMemory() {
 	std::cout << "Freeing memory..." << std::endl;
 	CUDA_CHECK_RETURN(cudaFree(device_buffer_A));
 	CUDA_CHECK_RETURN(cudaFree(device_buffer_B));
+	CUDA_CHECK_RETURN(cudaFree(device_buffer_C));
 
 	//CUDA_CHECK_RETURN(cudaFree(device_block_entry_counts));
 	CUDA_CHECK_RETURN(cudaFree(device_local_kbc_num_entries));
@@ -3573,8 +3620,8 @@ int main(int argc, char *argv[])
 	cmd_read = 0;
 
 	if (cmd_read == 2) {
-		attack_it();
-		//doPhase2Pruning();
+		//attack_it();
+		doPhase2Pruning();
 		exit(EXIT_SUCCESS);
 	}
 	if (cmd_read == 3) {
@@ -3593,7 +3640,6 @@ int main(int argc, char *argv[])
 	auto total_start = std::chrono::high_resolution_clock::now();
 	doT1();
 	doTx(2);
-	return;
 	doTx(3);
 	doTx(4);
 	doTx(5);
@@ -3603,8 +3649,10 @@ int main(int argc, char *argv[])
 	std::cout << "Total tables time: " << std::chrono::duration_cast<milli>(total_end - total_start).count() << " ms\n";
 	std::cout << "        match: " << total_match_time_ms << " ms\n";
 	std::cout << "   ----------  " << std::endl;
-	std::cout << "transfer time: " << total_transfer_time_ms << " ms\n";
-	std::cout << "        bytes: " << total_transfered_bytes << " (" << (total_transfered_bytes/(1024*1024*1024)) << "GB)\n";
+	std::cout << "transfer in time: " << total_transfer_in_time_ms << " ms\n";
+	std::cout << "        bytes: " << total_transfer_in_bytes << " (" << (total_transfer_in_bytes/(1024*1024*1024)) << "GB)\n";
+	std::cout << "transfer out time: " << total_transfer_out_time_ms << " ms\n";
+		std::cout << "        bytes: " << total_transfer_out_bytes << " (" << (total_transfer_out_bytes/(1024*1024*1024)) << "GB)\n";
 	std::cout << "*********************" << std::endl;
 	std::cout << "Max block entries used: " << max_block_entries_copied_device_to_host << " VS HOST_MAX_BLOCK_ENTRIES:" << HOST_MAX_BLOCK_ENTRIES << std::endl;
 	std::cout << " freeing memory...";

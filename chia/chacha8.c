@@ -34,6 +34,11 @@ void chacha8_keysetup_data(uint32_t *input, const uint8_t *k, uint32_t kbits, co
         input[14] = 0;
         input[15] = 0;
     }
+
+    //for (int i=0;i<=15;i++) {
+    //	printf("\ninput%d:%u", i, input[i]);
+    //}
+    //exit(0);
 }
 
 void chacha8_get_keystream_data(const uint32_t *input, uint64_t pos, uint32_t n_blocks, uint8_t *c)
