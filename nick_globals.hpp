@@ -24,13 +24,16 @@ const uint32_t KBC_LOCAL_NUM_BUCKETS = KBCS_PER_BATCH + 1; // +1 is for includin
 
 
 const uint64_t HOST_UNIT_BYTES = 20; //12// Bytes used for biggest host entry.
-const uint64_t HOST_MAX_BLOCK_ENTRIES = 1114112; // 1052614 (min calculated) // 1258291; // (120 * ((uint64_t) 1 << 32)) / (100*(BATCHES * BATCHES));
+const uint64_t HOST_MAX_BLOCK_ENTRIES = 1114112;//1114112; // MUST be multiple of 32 so it works with bit masking // 1052614 (min calculated) // 1258291; // (120 * ((uint64_t) 1 << 32)) / (100*(BATCHES * BATCHES));
 const uint64_t HOST_ALLOCATED_ENTRIES = HOST_MAX_BLOCK_ENTRIES * BATCHES * BATCHES;
 const uint64_t HOST_ALLOCATED_BYTES = HOST_UNIT_BYTES * HOST_ALLOCATED_ENTRIES;
 
-const uint64_t DEVICE_BUFFER_UNIT_BYTES = 24; // Tx_pairing_chunk_meta4 is 24 bytes
+const uint64_t DEVICE_BUFFER_UNIT_BYTES = 24;//32; // Tx_pairing_chunk_meta4 is 24 bytes, w/ backref is 32 bytes
 const uint64_t DEVICE_BUFFER_ALLOCATED_ENTRIES = KBC_LOCAL_NUM_BUCKETS * KBC_MAX_ENTRIES_PER_BUCKET; // HOST_MAX_BLOCK_ENTRIES * BATCHES;// DEVICE_BUFFER_ALLOCATED_ENTRIES = 120 * ((uint64_t) 1 << 32) / (100*BATCHES);
 const uint64_t DEVICE_BUFFER_ALLOCATED_BYTES = DEVICE_BUFFER_ALLOCATED_ENTRIES * DEVICE_BUFFER_UNIT_BYTES;
+const uint64_t BACKREF_UNIT_BYTES = 12; // backref w/y for last table is 12 bytes
+const uint64_t BACKREF_ALLOCATED_BYTES = DEVICE_BUFFER_ALLOCATED_ENTRIES * BACKREF_UNIT_BYTES;
+
 
 const uint64_t CROSS_MATRIX_BC = (2097152 * 128) + kBC - ((2097152 * 128) % kBC);
 const uint64_t CROSS_MATRIX_NUM_BUCKETS = 1024; // each batch splits into buckets, the max per bucket is dependent on size of batch
@@ -141,14 +144,43 @@ struct Index_Match {
 };
 
 // our base pairing struct T3.
-struct BaseRef {
+struct T2BaseRef {
 	uint32_t Lx1;
 	uint32_t Lx2;
+};
+
+struct T3BaseRef {
+	uint32_t Lx1;
+	uint32_t Lx2;
+	uint32_t Lx3;
+	uint32_t Lx4;
+};
+
+struct T2BaseRefWithUsed {
+	uint32_t Lx1;
+	uint32_t Lx2;
+	bool used;
 };
 
 struct BackRef {
 	uint32_t prev_block_ref_L; // (block_id(L) << (32 - 6)) + block_pos
 	uint32_t prev_block_ref_R; // (block_id(R) << (32 - 6)) + block_pos
+};
+
+struct T6BackRef { // 12 bytes
+	uint32_t prev_block_ref_L; // (block_id(L) << (32 - 6)) + block_pos
+	uint32_t prev_block_ref_R; // (block_id(R) << (32 - 6)) + block_pos
+	uint32_t y;
+};
+
+struct T6FinalEntry {
+	uint32_t refL; // 6,6,6 = 24
+	uint32_t refR; // 6,6,6 = 24
+	uint32_t y;    // 32
+};
+
+struct T4FinalEntry {
+	uint32_t Lx1,Lx2,Lx3,Lx4,Lx5,Lx6,Lx7,Lx8;
 };
 
 
@@ -168,8 +200,9 @@ const uint32_t nickBC = (2097152 * 128) + kBC - ((2097152 * 128) % kBC);
 const uint32_t NICK_BUCKET_MAX_ENTRIES = 34000 * 128;
 const uint32_t NICK_NUM_BUCKETS = 1024;
 
-#define CRISS_CROSS_BLOCK_ID(table, batch_id, block_id) \
-(((table % 2) == 1) ? batch_id * BATCHES  + block_id : batch_id * BATCHES + batch_id)
+// code below is WRONG! 2nd clause only uses batch_id
+//#define CRISS_CROSS_BLOCK_ID(table, batch_id, block_id) \
+//(((table % 2) == 1) ? batch_id * BATCHES  + block_id : batch_id * BATCHES + batch_id)
 
 
 uint64_t getCrissCrossBlockId(uint8_t table, uint32_t batch_id, uint32_t block_id) {
@@ -206,6 +239,7 @@ void HexToBytes(const string &hex, uint8_t *result)
 
 void chacha_setup() {
 	string id = "022fb42c08c12de3a6af053880199806532e79515f94e83461612101f9412f9e";
+	//string id = "0000000000000000000000000000000000000000000000000000000000000000";
 
 	uint8_t enc_key[32];
 
