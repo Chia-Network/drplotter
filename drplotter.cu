@@ -30,6 +30,7 @@
 #include "phase2.hpp"
 
 
+
 const uint16_t THREADS_FOR_MATCHING = 256; // 386 is 10600ms matching. 256 is 9761ms matching. 237 is...10109
 
 int cmd_read = 0;
@@ -54,6 +55,7 @@ char *host_criss_cross_blocks; // aka host_meta_blocks
 char *host_refdata_blocks;
 char *device_buffer_A;
 char *device_buffer_B;
+
 char *device_buffer_C;
 char *device_buffer_T3_base;
 char *device_buffer_refdata;
@@ -589,11 +591,8 @@ void gpu_find_tx_matches(uint16_t table, uint32_t batch_id, uint32_t start_kbc_L
 	}
 	__syncthreads(); // all written initialize data should sync
 
+
 	/*bool printandquit = ((global_kbc_L_bucket_id == 0));
-
-
-
-
 		if (printandquit) {
 			if (threadIdx.x == 0) {
 
@@ -929,7 +928,9 @@ void gpu_find_tx_matches(uint16_t table, uint32_t batch_id, uint32_t start_kbc_L
 
 	if ((doPrint >=1) && (threadIdx.x == 0)) {
 		//if ((doPrint > 0) && (global_kbc_L_bucket_id < 10 == 0)) printf(" matches kbc bucket: %u num_L:%u num_R:%u pairs:%u\n", global_kbc_L_bucket_id, num_L, num_R, total_matches);
+
 		if ((global_kbc_L_bucket_id % 1000000 == 0) || (global_kbc_L_bucket_id < 10)) printf(" matches kbc bucket: %u num_L:%u num_R:%u pairs:%u\n", global_kbc_L_bucket_id, num_L, num_R, total_matches);
+
 
 	}
 	/*
@@ -2661,6 +2662,24 @@ void gpu_find_tx_matches_orig(uint16_t table, uint32_t batch_id, uint32_t start_
 }
 
 //if ((x + i) < 256) { printf("x: %u  y:%llu  kbc:%u\n", (x+i), y, kbc_bucket_id); }
+#define KBCFILTER(chacha_y,i) \
+{ \
+	uint64_t y = (((uint64_t) chacha_y) << 6) + (x >> 26); \
+	uint32_t kbc_bucket_id = uint32_t (y / kBC); \
+	for (int j=0;j<64;j++) { \
+		if (include_xs[j] == (x+i)) { printf("including x %u\n", (x+i)); \
+	if ((kbc_bucket_id >= KBC_START) && (kbc_bucket_id <= KBC_END)) { \
+		uint32_t local_kbc_bucket_id = kbc_bucket_id - KBC_START; \
+		int slot = atomicAdd(&kbc_local_num_entries[local_kbc_bucket_id],1); \
+		F1_Bucketed_kBC_Entry entry = { (x+i), (uint32_t) (y % kBC) }; \
+		if (slot >= KBC_MAX_ENTRIES_PER_BUCKET) { printf("ERROR KBC OVERFLOW MAX:%u actual:%u", KBC_MAX_ENTRIES_PER_BUCKET, slot); } \
+		uint32_t entries_address = local_kbc_bucket_id * KBC_MAX_ENTRIES_PER_BUCKET + slot; \
+		kbc_local_entries[entries_address] = entry; \
+	} \
+	} } \
+}
+
+//if ((x + i) < 256) { printf("x: %u  y:%llu  kbc:%u\n", (x+i), y, kbc_bucket_id); }
 //if (((x+i) % (1024*1024)) == 0) { printf("x: %u  chacha: %u y:%llu  kbc:%u\n", (x+i), chacha_y, y, kbc_bucket_id); }
 //if (kbc_bucket_id == 0) { printf("x: %u  chacha: %u y:%llu  kbc:%u\n", (x+i), chacha_y, y, kbc_bucket_id); }
 
@@ -3451,7 +3470,9 @@ void doTxBatch(uint16_t table, uint32_t batch_id) {
 		transferBucketedBlocksFromDeviceToHost(table, batch_id, device_buffer_B, transfer_out_size, device_buffer_refdata, device_block_entry_counts);
 		CUDA_CHECK_RETURN(cudaDeviceSynchronize());
 		finish = std::chrono::high_resolution_clock::now();
+
 		table_transfer_out_time_ms += std::chrono::duration_cast<milli>(finish - start).count();
+
 		//std::cout << "   done. " << std::chrono::duration_cast<milli>(finish - start).count() << " ms\n";
 	//} else if (table == 6) {
 		// TODO: handle final T6 file...maybe this can write into hostmem instead of to file.
@@ -3553,6 +3574,7 @@ void setupMemory() {
 	std::cout << "      device_buffer_B " << DEVICE_BUFFER_ALLOCATED_ENTRIES << " * (UNIT BYTES:" <<  DEVICE_BUFFER_UNIT_BYTES << ") = " << DEVICE_BUFFER_ALLOCATED_BYTES << std::endl;
 	CUDA_CHECK_RETURN(cudaMalloc(&device_buffer_B, DEVICE_BUFFER_ALLOCATED_BYTES));
 
+
 	std::cout << "      device_buffer_C " << DEVICE_BUFFER_ALLOCATED_ENTRIES << " * (UNIT BYTES:" <<  DEVICE_BUFFER_UNIT_BYTES << ") = " << DEVICE_BUFFER_ALLOCATED_BYTES << std::endl;
 	CUDA_CHECK_RETURN(cudaMalloc(&device_buffer_C, DEVICE_BUFFER_ALLOCATED_BYTES));
 
@@ -3618,7 +3640,6 @@ int main(int argc, char *argv[])
 	auto total_start = std::chrono::high_resolution_clock::now();
 	doT1();
 	doTx(2);
-	//return;
 	doTx(3);
 	doTx(4);
 	doTx(5);
