@@ -1,52 +1,35 @@
-# Meet DrPlotter: Your Go-To for Chia Farming
 
-*DrPlotter* is an advanced, energy-efficient GPU plotter, solver, and harvester designed for the Chia Blockchain, with break-through rewards and efficiency optimized for consumer-grade hardware. Offering Eco3x for enhanced energy efficiency and Pro4x for high-density plotting, boost rewards by over 400% compared to standard Chia plots to achieve higher ROI than any other solution.
+
+
+
+# DrPlotter: Your Go-To for Maximum ROI Chia Farming
+
+DrPlotter is an advanced, energy-efficient GPU plotter, solver, and harvester designed for the Chia Blockchain, with break-through rewards and efficiency optimized for consumer-grade hardware. 
 
 - **Up to +413% Rewards**: Two compression modes offer a balance between optimal efficiency and optimal cost per eTB for maximum ROI.
 - **Enhanced Security**: Relies solely on public farmer keys, letting you safeguard your private keys.
 - **Effortless Remote GPU Use**: Enjoy a streamlined process for submitting proofs and the flexibility to use your GPU remotely with ease.
 - **Supporting the Chia Ecosystem**: By seamlessly integrating with the official Chia Farmers, DrPlotter plays a part in keeping the Chia network strong and decentralized.
 
-Below is an overview of Eco3x and Pro4x plots created by DrPlotter.
-| Compression Mode                        | Eco3x                        | Pro4x                        |
-|-----------------------------------------|:----------------------------:|:----------------------------:|
-| Plot Size                               | 35.2 GiB                     | 24.2 GiB                     |
-| Reward vs standard plots                | 297%                         | 413%                         |
-| Capacity per RTX 3090 @ 260W<sup>1</sup>| ~470 TiB / 1385 eTiB         | ~200 TiB / 820 eTiB          |
-| Capacity per RTX 4090 @ 330W<sup>1</sup>| ~950 TiB / 2800 eTiB         | ~380 TiB / 1560 eTiB         |
-| Lower W / eTB vs standard plots         | ✔✔                           | ✔<sup>2</sup>                |
-| Lower $ / eTB vs standard plots         | ✔                            | ✔✔                           |
-| Plot time                               |        6-7 minutes           | 6-7 minutes                  |
-| Plot direct to HDD<sup>3</sup>          | ✔                            | ✔                            |
+Offering Eco3x for enhanced energy efficiency and Pro4x for maximum plot size reduction you can achieve higher ROI than any other solution.
 
+![DrPlotter eco3x and eco4x summary](images/drplotter-plots-summary.png)
 <sup>1: capacities with current chia plot filter of 512. For a plot filter of 256 halve these values.</sup>
-<br><sup>2: at a plot filter of 256 (expected June 2024), currently only the 4090 has less W/eTB than standard plots on pro4x.</sup>
-<br><sup>3: **No SSD required.** While you can use an SSD as an intermediary drive under most cases it will not improve plot time.</sup>
+<sup>2: at a plot filter of 256 (expected June 2024), currently only the 4090 has less W/eTB than standard plots on pro4x.</sup>
+<sup>3: **No SSD required.** While you can use an SSD as an intermediary drive under most cases it will not improve plot time.</sup>
 
 ## The Eco3x Advantage
 
 Eco3x compression offers an energy-efficient solution for managing chia farms, especially with the upcoming chia plot filter of 256. The table below illustrates Eco3x's efficiency compared to traditional uncompressed plots for a 1 ePiB farm (around 10,000 plots). Eco3x significantly reduces hard drive space and energy consumption, leading to considerable savings in both hardware investment and operational costs. This makes it a highly effective option for Chia users, even those facing high energy expenses, to achieve exceptional ROI.
 
-| Setup        | Physical TiB | # plots      | plot filter | gpu capacity     | daily kW usage per ePiB | Hardware Cost per ePiB<sup>1</sup> |
-|--------------|-------------:|-------------:|:----:|:----------------:|:----------------:|:----------------------:|
-| Uncompressed | 1,000         | 10,000        | - | -                | 14.40            | ~$16,000       |
-| Eco3x w/3090 @ 260W | 334 | 10,000 | 512 | 71% | 9.24<br><sub>+36% efficiency</sub> | ~$6,144<br><sub>38% of cost</sub>|
-| Eco3x w/2x3090 @ 260W | 334 | 10,000 | 256<br><sub>(coming June 2024)</sub> | 71% | 13.68<br><sub>+5% efficiency</sub>| ~$6,944<br><sub>43% of cost</sub> |
-| Eco3x w/4090 @ 330W | 334 | 10,000 | 256<br><sub>(coming June 2024)</sub> | 70% | 10.38<br><sub>+28% efficiency</sub> | ~$7,144<br><sub>44% of cost</sub> |
-
+![Table comparing eco3x advantages to regular plots](images/eco3x-advantage.png)
 <sub>1: The "Hardware Cost per ePiB" represents the actual costs of purchasing the necessary hardware for disks and GPUs. This is based on an estimated $16 per installed TB and $800 for a used 3090 GPU</sub>
 
 ## The Pro4x Advantage
 
 Pro4x compression significantly reduces hard drive needs for your plots to less than a quarter compared to uncompressed plots, marking a major leap in cost and space savings. By matching your hard drive capacity with your GPU's power, Pro4x achieves unmatched ROI. The table shows that with 4090 GPUs at full capacity, even with the challenging 256 plot filter, you can efficiently run a 1.5 ePiB farm at just 39% of the normal cost. Notably, Pro4x enables over 1 ePiB of plots in a consumer PC case using only 14 hard drives, compared to the 56 drives a large server setup would need, enhancing space utilization, cost-effectiveness, and management simplicity.
 
-| Setup        | Physical TiB | # plots      | plot filter | gpu capacity     | daily kW usage per ePiB | Hardware Cost per ePiB<sup>1</sup> |
-|--------------|-------------:|-------------:|-----:|-----------------:|-----------------:|-----------------------:|
-| Uncompressed | 1,000         | 10,000        | - | -                | 14.40            | ~$16000       |
-| Pro4x w/4090 @ 330W | 243 | 10,000 | 512 | 64% | 8.56<br><sub>+41% efficiency</sub>| ~$5688<br><sub>36% of cost</sub> |
-| Pro4x w/2x4090 @ 330W | 243 | 10,000 | 256 <br><sub>(coming June 2024)</sub> | 64% | 13.63<br><sub>+5% efficiency</sub> | ~$7488<br><sub>47% of cost</sub>|
-| Pro4x w/2x4090 @ 330W | 380 | 15,600 | 256 <br><sub>(coming June 2024)</sub> | 100% | 13.63<br><sub>+5% efficiency</sub> | ~$6205<br><sub>39% of cost</sub> |
-
+![Table comparing pro4x advantages to regular plots](images/pro4x-advantage.png)
 <sub>1: The "Hardware Cost per ePiB" represents the actual costs of purchasing the necessary hardware for disks and GPUs. This is based on an estimated $16 per installed TB and $1800 for a new 4090 GPU</sub>
 
 ## Get the Most Out of Your GPU with Eco3x and Pro4x
@@ -60,7 +43,8 @@ Eco3x and Pro4x plots let you use your hard drive space and GPU power to the ful
 - Use 235 TiB for Eco3x plots. This keeps 50% of your 3090 GPU busy.
 - Fill the remaining 100 TiB with Pro4x plots. This uses up the other 50% of your GPU.
 
-**The Outcome:** This mix lets you use all of your storage space wisely, filling it with Eco3x and Pro4x plots. You end up with a total plot size of about 1.1 ePiB (3x the size of your Eco3x space and 4x your Pro4x space). Your GPU is always active, making sure you're using your resources efficiently.
+**The Outcome:** 
+This mix lets you use all of your storage space wisely, filling it with Eco3x and Pro4x plots. You end up with a total plot size of about 1.1 ePiB (3x the size of your Eco3x space and 4x your Pro4x space). Your GPU is always active, making sure you're using your resources efficiently.
 
 
 ## About the Developer and DrPlotter's Fee Structure
@@ -74,7 +58,7 @@ The specifics of this fee structure are kept confidential to safeguard the uniqu
 
 # How it works
 
-[Diagram of DrPlotter, DrSolver, DrHarvester]
+![Diagram of DrPlotter components](images/drplotter-components.png)
 
 **DrPlotter** is the plotting tool that creates Eco3x and Pro4x plots. Given your farmer and pool public keys, it produces "DrPlots" using write-once technology directly to your HDD, typically in 6-7 minutes per plot. No SSD required.
 
@@ -106,7 +90,7 @@ DrSolver Minimum Requirements:
 - 24GB nvidia 3090.
 - Ubuntu / Debian based system
 
-DrHarvester Minimum Requirements:
+DrChia Harvester Minimum Requirements:
 - ~4GB RAM for every 1PiB of raw disk space.
 - Ubuntu / Debian based system
 
@@ -158,7 +142,7 @@ Plotting File: drplot-pro4x-2024-01-24-00-35-372b8c5b9948587dcf4e6b66565cd382.dr
 
 ============ 2024-01-24 00:43:42 ============
 ```
-Bits/proof is the most imporant metric for compression. A standard k32 chia plot will require around 202.8 bits for each proof it stores. By comparing bits per proof, we can accurately see the compression based on the number of proofs a plot has, and not just it's physical size.
+Bits/proof is the most important metric for compression. A standard k32 chia plot will require around 202.8 bits for each proof it stores. By comparing bits per proof, we can accurately see the compression based on the number of proofs a plot has, and not just it's physical size.
 
 To see more plotting options, run:
 ```
@@ -220,17 +204,15 @@ Once your DRPLOTTER_CLIENT_TOKEN is set in your environment (see [previous secti
 ```
 drsolver
 ```
-DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token. An exmaple output is below:
-
-[ example solver output ]
+DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token.
 
 While DrSolver is running, monitor the "buffer" increase, which indicates the proof-solving process being smoothed out by your GPU. When your GPU is underutilized, it lends assistance to other network GPUs. Conversely, if your GPU is overwhelmed, the buffer draws on network resources to aid in processing your plot proofs. A failure to fill the buffer suggests your GPU has reached its maximum capacity, risking dropped proofs. Monitor the 5-minute and 15-minute "load" indicators to gauge the current capacity usage of your GPU as a percentage of its total capacity. 
 
-## Setup and run your DrChia harvester
+## Setup and Run your DrChia Harvester
  
 On your harvester system, set the DRPLOTTER_CLIENT_TOKEN environment variable to the one you [generated with your DrSolver](https://github.com/drnick23/drplotterv3/blob/main/README.md#setting-up-your-drplotter_client_token).
 
-### System with existing chia harvester
+### System with Existing Chia Harvester
  
 If you already have a chia setup for your system, you can simply run:
 
@@ -246,7 +228,7 @@ Add any new plot directories you've plotted, as you would with chia's software, 
 drchia add plots -d /your/plots/directory
 ```
 
-### New system as remote harvester
+### New System as Remote Harvester
 
 If you don't have any harvester setup on your machine, you can follow the [chia official guide to setting up a remote harvester](https://docs.chia.net/farming-on-many-machines/). You can either setup with the official chia harvester, or use drchia for setup similar to using chia:
  
@@ -301,27 +283,3 @@ Then congrats, your drchia harvester has found your plots and should be harvesti
 
 > [!NOTE]
 > If you have not yet connected a drsolver with your same DRPLOTTER_CLIENT_TOKEN, you will see a warning or error message in your harvester logs. Once your drsolver starts running, the harvester will then connect to the server and start sending plots to your solvers.
-
-
-- **`eco3x` compression**: Ideal for users seeking a straightforward, energy-efficient approach. This produces `drplots` that require less energy for proof solving, maintaining effectiveness even for more demanding future plot filter levels.
-- **`pro4x` compression**: Suited for advanced users focusing on optimizing ROI. Consider this mode for setups with lower energy costs or high-efficiency operations, balancing operational and hardware costs.
-
-## FAQ:
-
-Can I join or change pools?
-Yes. You farm and choose to self pool or join any pool you want, as intended by Chia's original design and contributing to raising the Nakomoto consensus, a leading strength indicator of the Chia Blockchain.
-
-Do I need an SSD?
-While you can use an SSD as an intermediary drive, under most circumstances it will not improve any performance. As long as your HDD or method of transfer to the final destination HDD can support write speeds of 70MB/s you should notice no write delays.
-
-What's the ideal setup?
-Ideal setups range from scaling up using self-contained PC builds for both plotting and solving, to using a centralized harvester and distributing your GPUs across other machines. For users starting out, I would recommend a single PC build for plotting, solving, and harvesting.
-
-PC Build: gaming motherboard with PCIE 4.0 x 16 and 128GB DDR 4 RAM, the lowest energy cpu you can find, nvidia 3090, 750W power supply, large PC case to house 14 HDD's, of 18TB each.
-
-Do I need to setup my plot difficulty in my pool to a certain threshold?
-No. In fact, it is recommended to set your pool difficulty to 1 or the lowest setting you can, so you can monitor your plots more effectively.
-
-Can I use my gpu when it's not solving 100% of the time?
-Currently, your gpu will be dedicated to solving plots and will consume a significant amount of RAM. You could still use your computer for normal browsing or non-GPU intensive tasks that don't require much memory. In the future, it's possible DrPlotter could offer revenue opportunities for unused GPU cycles.
-
