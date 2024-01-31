@@ -82,7 +82,7 @@ While details of this technology are confidential, my commitment remains to deli
 
 # Using DrPlotter
 
-- Make sure you meet the [minimum requirements](https://github.com/drnick23/drplotterv3/blob/main/README.md#minimum-requirements)
+- Make sure you meet the [minimum requirements](#minimum-requirements)
 - Download and [install the software](#installation)
 - [Start plotting](#plotting) with the DrPlotter tool.
 - [Set your client token](#setting-up-your-drplotter_client_token)
@@ -212,7 +212,7 @@ and check that the output matches your token.
 
 ## Run your DrSolver
 
-Once your DRPLOTTER_CLIENT_TOKEN is set in your environment (see [previous section](https://github.com/drnick23/drplotterv3/blob/main/README.md#setting-up-your-drplotter_client_token)), run:
+Once your DRPLOTTER_CLIENT_TOKEN is set in your environment (see [previous section](#setting-up-your-drplotter_client_token)), run:
 ```
 drsolver
 ```
@@ -248,7 +248,7 @@ While DrSolver is running, monitor the 5-minute and 15-minute "load" indicators 
 
 ## Setup and Run your DrChia Harvester
  
-On your harvester system, set the DRPLOTTER_CLIENT_TOKEN environment variable to the one you [generated with your DrSolver](https://github.com/drnick23/drplotterv3/blob/main/README.md#setting-up-your-drplotter_client_token).
+On your harvester system, set the DRPLOTTER_CLIENT_TOKEN environment variable to the one you [generated with your DrSolver](#setting-up-your-drplotter_client_token).
 
 ### System with Existing Chia Harvester
  
