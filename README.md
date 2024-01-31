@@ -217,6 +217,32 @@ drsolver
 ```
 DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token.
 
+```
+                            DrPlotter Solver v0.9.0
+
+DrPlotter Farm Status
+--------------------------------------------------------------------------------
+  Status: CONNECTED                                             Uptime: 02:23:30
+  Client Token: kWq9NXkHQ75zGheb...
+
+  Total Harvesters: 2                                           Total Solvers: 1
+
+  Num DrPlots        Raw Size           Effective Size     Extra Rewards
+  3911               95.80 TiB          376.20 TiB         +393%
+
+
+Solver GPU: NVIDIA GeForce RTX 3090
+--------------------------------------------------------------------------------
+  Fan    Temp   Perf   Pwr:Usage/Cap                                Memory-Usage
+  30%    61C    P2     237W / 240W                           23346MiB / 24576MiB
+
+  Status                                            Load  1 min / 5 min / 15 min
+  SOLVING                                                    14%  /  34%  /  32%
+
+
+Commands: [Q]uit
+```
+
 While DrSolver is running, monitor the 5-minute and 15-minute "load" indicators to gauge the current capacity usage of your GPU as a percentage of its total capacity. 
 
 ## Setup and Run your DrChia Harvester
@@ -297,4 +323,4 @@ Then congrats, your drchia harvester has found your plots and should be harvesti
 
 ## Checking it's all running smoothly
 
-The easiest way to check all your drplots are being farmed, is to join a pool and set the difficulty of your pool plots to the lowest setting you can (e.g. to 1). Drplots incur *no performance penalty* for very low difficulty settings, and this helps you monitor you are getting all the expected pool points.
+The easiest way to check all your drplots are being farmed, is to join a pool and set the difficulty of your pool plots to the lowest setting you can (e.g. to 1). Drplots incur *no performance penalty* even for very low difficulty settings, and this helps you monitor you are getting all the expected pool points.
