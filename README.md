@@ -215,7 +215,7 @@ Once your DRPLOTTER_CLIENT_TOKEN is set in your environment (see [previous secti
 ```
 drsolver
 ```
-DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token.
+DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token. Below is an example output:
 
 ```
                             DrPlotter Solver v0.9.0
