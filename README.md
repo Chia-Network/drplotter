@@ -217,7 +217,7 @@ drsolver
 ```
 DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token.
 
-While DrSolver is running, monitor the "buffer" increase, which indicates the proof-solving process being smoothed out by your GPU. When your GPU is underutilized, it lends assistance to other network GPUs. Conversely, if your GPU is overwhelmed, the buffer draws on network resources to aid in processing your plot proofs. A failure to fill the buffer suggests your GPU has reached its maximum capacity, risking dropped proofs. Monitor the 5-minute and 15-minute "load" indicators to gauge the current capacity usage of your GPU as a percentage of its total capacity. 
+While DrSolver is running, monitor the 5-minute and 15-minute "load" indicators to gauge the current capacity usage of your GPU as a percentage of its total capacity. 
 
 ## Setup and Run your DrChia Harvester
  
