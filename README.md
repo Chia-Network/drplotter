@@ -13,23 +13,31 @@ DrPlotter is an advanced, energy-efficient GPU plotter, solver, and harvester de
 
 Offering Eco3x for enhanced energy efficiency and Pro4x for maximum plot size reduction you can achieve higher ROI than any other solution.
 
-![DrPlotter eco3x and eco4x summary](images/drplotter-plots-summary.png)
+<p align="center" alt="DrPlotter eco3x and pro4x summary">
+  <img src="images/drplotter-plots-summary.png" />
+</p>
+
 <sup>1: capacities with current chia plot filter of 512. For a plot filter of 256 halve these values.</sup>
 <sup>2: at a plot filter of 256 (expected June 2024), currently only the 4090 has less W/eTB than standard plots on pro4x.</sup>
 <sup>3: **No SSD required.** While you can use an SSD as an intermediary drive under most cases it will not improve plot time.</sup>
 
 ## The Eco3x Advantage
 
-Eco3x compression offers an energy-efficient solution for managing chia farms, especially with the upcoming chia plot filter of 256. The table below illustrates Eco3x's efficiency compared to traditional uncompressed plots for a 1 ePiB farm (around 10,000 plots). Eco3x significantly reduces hard drive space and energy consumption, leading to considerable savings in both hardware investment and operational costs. This makes it a highly effective option for Chia users, even those facing high energy expenses, to achieve exceptional ROI.
+Eco3x compression offers an energy-efficient solution for managing chia farms, especially with the upcoming chia plot filter of 256. The table below illustrates Eco3x's efficiency compared to traditional uncompressed plots. Eco3x significantly reduces hard drive space and energy consumption, leading to considerable savings in both hardware investment and operational costs. This makes it a highly effective option for Chia users, even those facing high energy expenses, to achieve exceptional ROI.
 
-![Table comparing eco3x advantages to regular plots](images/eco3x-advantage.png)
+<p align="center" alt="Table comparing eco3x advantages to regular plots">
+  <img src="images/eco3x-advantage.png" />
+</p>
+
 <sub>1: The "Hardware Cost per ePiB" represents the actual costs of purchasing the necessary hardware for disks and GPUs. This is based on an estimated $16 per installed TB and $800 for a used 3090 GPU</sub>
 
 ## The Pro4x Advantage
 
-Pro4x compression significantly reduces hard drive needs for your plots to less than a quarter compared to uncompressed plots, marking a major leap in cost and space savings. By matching your hard drive capacity with your GPU's power, Pro4x achieves unmatched ROI. The table shows that with 4090 GPUs at full capacity, even with the challenging 256 plot filter, you can efficiently run a 1.5 ePiB farm at just 39% of the normal cost. Notably, Pro4x enables over 1 ePiB of plots in a consumer PC case using only 14 hard drives, compared to the 56 drives a large server setup would need, enhancing space utilization, cost-effectiveness, and management simplicity.
+Pro4x compression significantly reduces hard drive needs for your plots to less than a quarter compared to uncompressed plots, marking a major leap in cost and space savings. By matching your hard drive capacity with your GPU's power, Pro4x achieves unmatched ROI. The table shows that with 4090 GPUs at full capacity, even with the challenging 256 plot filter, you can efficiently run a 1.6 ePiB farm at just 38% the cost of a setup using regular plots. Notably, Pro4x enables over 1 ePiB of plots in a consumer PC case using only 14 hard drives, compared to the 56 drives a large server setup would need, enhancing space utilization, cost-effectiveness, and management simplicity.
 
-![Table comparing pro4x advantages to regular plots](images/pro4x-advantage.png)
+<p align="center" alt="Table comparing pro4x advantages to regular plots">
+  <img src="images/pro4x-advantage.png" />
+</p>
 <sub>1: The "Hardware Cost per ePiB" represents the actual costs of purchasing the necessary hardware for disks and GPUs. This is based on an estimated $16 per installed TB and $1800 for a new 4090 GPU</sub>
 
 ## Get the Most Out of Your GPU with Eco3x and Pro4x
@@ -58,7 +66,10 @@ While details of this technology are confidential, my commitment remains to deli
 
 # How it works
 
-![Diagram of DrPlotter components](images/drplotter-components.png)
+<p align="center" alt="Diagram of DrPlotter components">
+  <img src="images/drplotter-components.png" />
+</p>
+
 
 **DrPlotter** is the plotting tool that creates Eco3x and Pro4x plots. Given your farmer and pool public keys, it produces "DrPlots" using write-once technology directly to your HDD, typically in 6-7 minutes per plot. No SSD required.
 
