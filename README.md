@@ -83,11 +83,12 @@ While details of this technology are confidential, my commitment remains to deli
 # Using DrPlotter
 
 - Make sure you meet the [minimum requirements](https://github.com/drnick23/drplotterv3/blob/main/README.md#minimum-requirements)
-- Download and [install the software](https://github.com/drnick23/drplotterv3/blob/main/README.md#installation)
-- [Start plotting](https://github.com/drnick23/drplotterv3/blob/main/README.md#plotting) with the DrPlotter tool.
-- [Set your client token](https://github.com/drnick23/drplotterv3/blob/main/README.md#setting-up-your-drplotter_client_token)
-- [Run your DrSolvers](https://github.com/drnick23/drplotterv3/blob/main/README.md#run-your-drsolver)
-- [Setup and run your DrChia harvester](https://github.com/drnick23/drplotterv3/blob/main/README.md#setup-and-run-your-drchia-harvester) with your existing chia farmer.
+- Download and [install the software](#installation)
+- [Start plotting](#plotting) with the DrPlotter tool.
+- [Set your client token](#setting-up-your-drplotter_client_token)
+- [Run your DrSolvers](#run-your-drsolver)
+- [Setup and run your DrChia harvester](#setup-and-run-your-drchia-harvester) with your existing chia farmer.
+- [Verify your DrPlots are submitting proofs](#verify-your-drplots-are-submitting-proofs)
 
 ## Minimum Requirements
 DrPlotter Minimum Requirements:
@@ -209,7 +210,7 @@ and check that the output matches your token.
 > Keep your token secure and do not share it in public forums
 
 
-## Run your drsolver
+## Run your DrSolver
 
 Once your DRPLOTTER_CLIENT_TOKEN is set in your environment (see [previous section](https://github.com/drnick23/drplotterv3/blob/main/README.md#setting-up-your-drplotter_client_token)), run:
 ```
@@ -321,9 +322,9 @@ Then congrats, your drchia harvester has found your plots and should be harvesti
 > [!NOTE]
 > If you have not yet connected a drsolver with your same DRPLOTTER_CLIENT_TOKEN, you will see a warning or error message in your harvester logs. Once your drsolver starts running, the harvester will then connect to the server and start sending plots to your solvers.
 
-## Verifying your DrPlots are Working
+## Verify your DrPlots are Submitting Proofs
 
-To verify that your DrPlots are submitting proofs, it's recommended to join a pool and adjust the difficulty setting of your pool plots to the lowest possible value, such as 1. This approach is beneficial for several reasons:
+To check your DrPlots are submitting proofs, it's recommended to join a pool and adjust the difficulty setting of your pool plots to the lowest possible value, such as 1. This approach is beneficial for several reasons:
 
 - **No Performance Impact:** Setting the difficulty to a low level for DrPlots does not affect their performance. Thus, you can monitor their operation without any compromise on efficiency.
 
