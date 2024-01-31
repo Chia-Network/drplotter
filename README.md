@@ -47,13 +47,13 @@ Eco3x and Pro4x plots let you use your hard drive space and GPU power to the ful
 This mix lets you use all of your storage space wisely, filling it with Eco3x and Pro4x plots. You end up with a total plot size of about 1.1 ePiB (3x the size of your Eco3x space and 4x your Pro4x space). Your GPU is always active, making sure you're using your resources efficiently.
 
 
-## About the Developer and DrPlotter's Fee Structure
+## About the Developer and Contribution Structure
 
 DrPlotter has been a labor of love and dedication that has captivated my attention for over two years. What began as a passion project has transformed into a committed effort to advance the field of Chia plot compression and support the strengths of the Chia blockchain.
 
-To continue this journey, I've taken a completely new approach towards funding my development with DrPlotter, stepping away from the usual way of charging randomized or possibly changing fees on farming revenue. Instead, a small part of your GPU and disk space goes towards supporting and improving DrPlotter. I believe in transparency and honesty in all aspects of DrPlotter. That's why all the performance stats I present already include this fee component – ensuring that there are no hidden costs. What you see is precisely what you get. This fee structure is fixed and immutable, guaranteeing that the rate you commit to now will remain the same in the future. This consistency offers you ease in planning and peace of mind.
+To continue this journey, I've stepped away from incorporating a randomized fee or possibly changing fee on farming revenue. Instead, a minimal portion of user resources is allocated to support my own plots and farm. Most importantly, all the performance stats I present already factor in these contributions – ensuring that there are no hidden costs. What you see is precisely what you get. This contribution structure is steadfast and unchanging, ensuring that the results you see now will remain consistent in the future. This stability offers ease in planning and peace of mind.
 
-The specifics of this fee structure are kept confidential to safeguard the unique technology behind DrPlotter. However, my goal is always to deliver exceptional value and results. With DrPlotter, I aim to provide a reliable and cutting-edge tool that consistently meets your needs and stays at the forefront of Chia farming technology.
+While details of this technology are confidential, my commitment remains to deliver an efficient and cutting-edge tool for Chia farming.
 
 
 # How it works
