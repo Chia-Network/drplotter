@@ -321,6 +321,14 @@ Then congrats, your drchia harvester has found your plots and should be harvesti
 > [!NOTE]
 > If you have not yet connected a drsolver with your same DRPLOTTER_CLIENT_TOKEN, you will see a warning or error message in your harvester logs. Once your drsolver starts running, the harvester will then connect to the server and start sending plots to your solvers.
 
-## Checking it's all running smoothly
+## Verifying your DrPlots are Working
 
-The easiest way to check all your drplots are being farmed, is to join a pool and set the difficulty of your pool plots to the lowest setting you can (e.g. to 1). Drplots incur *no performance penalty* even for very low difficulty settings, and this helps you monitor you are getting all the expected pool points.
+To verify that your DrPlots are submitting proofs, it's recommended to join a pool and adjust the difficulty setting of your pool plots to the lowest possible value, such as 1. This approach is beneficial for several reasons:
+
+- **No Performance Impact:** Setting the difficulty to a low level for DrPlots does not affect their performance. Thus, you can monitor their operation without any compromise on efficiency.
+
+- **Effective Monitoring:** By using a low difficulty setting, it's easier to track and ensure that you are accruing the expected number of pool points. This setting enhances the visibility of the functioning of your drplots in the pool.
+
+- **Troubleshooting:** In case you notice discrepancies in the expected pool points, the low difficulty setting can help in detecting any problems early.
+
+As a result, you can effectively monitor and ensure that your drplots are being farmed correctly and submitting proofs to the pool as anticipated.
