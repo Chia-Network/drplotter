@@ -19,7 +19,7 @@ Offering Eco3x for enhanced energy efficiency and Pro4x for maximum plot size re
 
 <sup>1: capacities with current chia plot filter of 512. For a plot filter of 256 halve these values.</sup>
 <sup>2: at a plot filter of 256 (expected June 2024), currently only the 4090 has less W/eTB than standard plots on pro4x.</sup>
-<sup>3: **No SSD required.** While you can use an SSD as an intermediary drive under most cases it will not improve plot time.</sup>
+<sup>3: **SSD not required.** While you can use an SSD as an intermediary drive under most cases it will not improve plot time.</sup>
 
 ## The Eco3x Advantage
 
@@ -29,7 +29,8 @@ Eco3x compression offers an energy-efficient solution for managing chia farms, e
   <img src="images/eco3x-advantage.png" />
 </p>
 
-<sub>1: The "Hardware Cost per ePiB" represents the actual costs of purchasing the necessary hardware for disks and GPUs. This is based on an estimated $16 per installed TB and $800 for a used 3090 GPU</sub>
+<sub>1: Using 0.6W per installed TB</sub>
+<sub>2: The "Hardware Cost per ePiB" represents the actual costs of purchasing the necessary hardware for disks and GPUs. This is based on an estimated $16 per installed TB and $800 for a used 3090 GPU</sub>
 
 ## The Pro4x Advantage
 
@@ -38,7 +39,8 @@ Pro4x compression significantly reduces hard drive needs for your plots to less 
 <p align="center" alt="Table comparing pro4x advantages to regular plots">
   <img src="images/pro4x-advantage.png" />
 </p>
-<sub>1: The "Hardware Cost per ePiB" represents the actual costs of purchasing the necessary hardware for disks and GPUs. This is based on an estimated $16 per installed TB and $1800 for a new 4090 GPU</sub>
+<sub>1: Using 0.6W per installed TB</sub>
+<sub>2: The "Hardware Cost per ePiB" represents the actual costs of purchasing the necessary hardware for disks and GPUs. This is based on an estimated $16 per installed TB and $1800 for a new 4090 GPU</sub>
 
 ## Get the Most Out of Your GPU with Eco3x and Pro4x
 
