@@ -17,8 +17,8 @@ Offering Eco3x for enhanced energy efficiency and Pro4x for maximum plot size re
   <img src="images/drplotter-plots-summary.png" />
 </p>
 
-<sup>1: capacities with current chia plot filter of 512. For a plot filter of 256 halve these values.</sup>
-<sup>2: at a plot filter of 256 (expected June 2024), currently only the 4090 has less W/eTB than standard plots on pro4x.</sup>
+<sup>1: The 512 plot filter will be active until June 2024. During this period, the capacities supported by the 256 filter will be doubled.</sup>
+<sup>2: At a plot filter of 256 only the 4090 has less W/eTB than standard plots on pro4x.</sup>
 <sup>3: **SSD not required.** While you can use an SSD as an intermediary drive under most cases it will not improve plot time.</sup>
 
 ## The Eco3x Advantage
@@ -41,6 +41,35 @@ Pro4x compression significantly reduces hard drive needs for your plots to less 
 </p>
 <sub>1: Using 0.6W per installed TB</sub>
 <sub>2: The "Hardware Cost per ePiB" represents the actual costs of purchasing the necessary hardware for disks and GPUs. This is based on an estimated $16 per installed TB and $1800 for a new 4090 GPU</sub>
+
+## Strategic Efficiency: Eco3x and Pro4x vs. NoSSD's C15
+In the competitive landscape of chia farming, striking the right balance between energy consumption and cost per reward is key. Chia farming involves substantial initial setup costs but low ongoing expenses. The Eco3x and Pro4x solutions, developed with these economic dynamics in mind, optimize for a slight increase in energy use to significantly reduce the cost per reward across various setups and market conditions, offering a financial advantage.
+
+The performance of these solutions is contrasted with NoSSD's leading C15 plot format under a fixed $10,000 budget. Analysis shows that both Eco3x and Pro4x not only improve chia earnings but do so with an acceptable increase in energy consumption. Specifically, Eco3x delivers an extra 0.08 xch for 4.79 kWh more than C15, while Pro4x adds 0.14 xch for an additional 11.21 kWh.
+
+<p align="center" alt="DrPlotter Eco3x and Pro4x vs NoSSD C15">
+  <img src="images/Eco3x-Pro4x-vs-NoSSDC15.png" />
+</p>
+
+<sub>1: Hardware Cost includes expenses for disks and GPUs, calculated at $16 per installed TB and $1600 for a 4090 GPU. GPU costs are adjusted to utilization—e.g., at 38% utilization, only 38% of the GPU cost is counted. This approach ensures costs are proportionally represented for a fair comparison within a $10,000 investment.</sub>
+
+By evaluating the potential xch price against energy costs, it's clear that Eco3x and Pro4x are compelling for those seeking profitability over minimal energy use. For example, if your electricity costs are $0.14 per kWh with XCH priced at $30:
+
+```
+Eco3x extra earnings - extra energy costs = 0.08 * $30 - 4.79 * $0.14  = +$1.72 vs NoSSD.
+Pro4x extra earnings - extra energy costs = 0.14 * $30 - 11.21 * $0.14 = +$2.63 vs NoSSD.
+```
+These figures highlight Pro4x as a strong contender, offering a 38.7% higher daily return than NoSSD's C15 ($9.42 per day vs $6.79 per day), despite a higher energy consumption.
+
+To enhance your decision-making process, the chart below serves as a guide for evaluating risks and potential returns. For those who prefer a cautious approach, opt for a plot format that remains viable at lower XCH prices. 
+
+<p align="center" alt="DrPlotter Eco3x and Pro4x vs NoSSD C15">
+  <img src="images/Consider-Eco3x-Pro4x-NoSSDC15-kWh.png" />
+</p>
+
+> [!IMPORTANT]  
+> The chart provided is tailored to reflect scenarios involving the use of 4090 GPUs, as detailed in the hardware setup section above.
+
 
 ## Get the Most Out of Your GPU with Eco3x and Pro4x
 
