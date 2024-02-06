@@ -70,7 +70,6 @@ To enhance your decision-making process, the chart below serves as a guide for e
 > [!IMPORTANT]  
 > The chart provided is tailored to reflect scenarios involving the use of 4090 GPUs, as detailed in the hardware setup section above.
 
-
 ## Get the Most Out of Your GPU with Eco3x and Pro4x
 
 Eco3x and Pro4x plots let you use your hard drive space and GPU power to the fullest. By allocating Eco3x and Pro4x across your HDDs based on how much space you have, you make sure your GPU is always busy, with no downtime.
