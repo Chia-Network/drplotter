@@ -307,7 +307,7 @@ drchia plots add -d /your/plots/directory
 
 ### New System as Remote Harvester
 
-If you don't have any harvester setup on your machine, you can follow the [chia official guide to setting up a remote harvester](https://docs.chia.net/farming-on-many-machines/). You can either setup with the official chia harvester, or use drchia for setup similar to using chia:
+If you don't have any harvester setup on your machine, you can follow the [chia official guide to setting up a remote harvester](https://docs.chia.net/farming-on-many-machines/) but use the `drchia` command instead of the `chia` command:
  
 -  First, run:
 
