@@ -287,6 +287,9 @@ While DrSolver is running, monitor the 5-minute and 15-minute "load" indicators 
 On your harvester system, set the DRPLOTTER_CLIENT_TOKEN environment variable to the one you [generated with your DrSolver](#setting-up-your-drplotter_client_token).
 
 ### System with Existing Chia Harvester
+
+> [!IMPORTANT]
+> Chia Network recently released new harvesters that break changes in config.yaml files. If you have trouble with this section on an existing chia harvester, remove your ~/.chia/ directory and setup again using drchia init instead as explained in the next section.
  
 If you already have a chia setup for your system, you can simply run:
 
@@ -299,7 +302,7 @@ Make sure to include the -r to stop any previous harvesters and replace them wit
 Add any new plot directories you've plotted, as you would with chia's software, e.g.:
 
 ```
-drchia add plots -d /your/plots/directory
+drchia plots add -d /your/plots/directory
 ```
 
 ### New System as Remote Harvester
