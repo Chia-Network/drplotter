@@ -4,7 +4,7 @@
 
 # DrPlotter: Your Go-To for Maximum ROI Chia Farming
 
-DrPlotter is an advanced, energy-efficient GPU plotter, solver, and harvester designed for the Chia Blockchain, with break-through rewards and efficiency optimized for consumer-grade hardware. 
+DrPlotter is an advanced, energy-efficient GPU plotter, solver, and harvester designed for the Chia Blockchain, with break-through rewards and efficiency optimized for consumer-grade hardware. See the video on the [Introduction to DrPlotter](https://www.youtube.com/watch?v=hQTV7foIRHo&t=3s).
 
 - **Up to +413% Rewards**: Two compression modes offer a balance between optimal efficiency and optimal cost per eTB for maximum ROI.
 - **Enhanced Security**: Relies solely on public farmer keys, letting you safeguard your private keys.
@@ -19,7 +19,7 @@ Offering Eco3x for enhanced energy efficiency and Pro4x for maximum plot size re
 
 <sup>1: The 512 plot filter will be active until June 2024. During this period, the capacities supported by the 256 filter will be doubled.</sup>
 <sup>2: At a plot filter of 256 only the 4090 has less W/eTB than standard plots on pro4x.</sup>
-<sup>3: **SSD not required.** While you can use an SSD as an intermediary drive under most cases it will not improve plot time.</sup>
+<sup>3: **SSD not required.** While you can use an SSD as an intermediary drive under most cases it will not improve plot time. 4090 @ 250W with PCIE 4.0 x 16 can plot in 5:30.</sup>
 
 ## The Eco3x Advantage
 
@@ -45,7 +45,7 @@ Pro4x compression significantly reduces hard drive needs for your plots to less 
 ## Strategic Efficiency: Eco3x and Pro4x vs. NoSSD's C15
 In the competitive landscape of chia farming, striking the right balance between energy consumption and cost per reward is key. Chia farming involves substantial initial setup costs but low ongoing expenses. The Eco3x and Pro4x solutions, developed with these economic dynamics in mind, optimize for a slight increase in energy use to significantly reduce the cost per reward across various setups and market conditions, offering a financial advantage.
 
-The performance of these solutions is contrasted with NoSSD's leading C15 plot format under a fixed $10,000 budget. Analysis shows that both Eco3x and Pro4x not only improve chia earnings but do so with an acceptable increase in energy consumption. Specifically, Eco3x delivers an extra 0.08 xch for 4.79 kWh more than C15, while Pro4x adds 0.14 xch for an additional 11.21 kWh.
+The performance of these solutions is contrasted with NoSSD's leading C15 plot format under a fixed $10,000 budget. Analysis shows that both Eco3x and Pro4x not only improve chia earnings but do so with an acceptable increase in energy consumption. Specifically, Eco3x delivers an extra 0.10 xch for 4.79 kWh more than C15, while Pro4x adds 0.16 xch for an additional 11.21 kWh.
 
 <p align="center" alt="DrPlotter Eco3x and Pro4x vs NoSSD C15">
   <img src="images/Eco3x-Pro4x-vs-NoSSDC15.png" />
@@ -56,10 +56,10 @@ The performance of these solutions is contrasted with NoSSD's leading C15 plot f
 By evaluating the potential xch price against energy costs, it's clear that Eco3x and Pro4x are compelling for those seeking profitability over minimal energy use. For example, if your electricity costs are $0.14 per kWh with XCH priced at $30:
 
 ```
-Eco3x extra earnings - extra energy costs = 0.08 * $30 - 4.79 * $0.14  = +$1.72 vs NoSSD.
-Pro4x extra earnings - extra energy costs = 0.14 * $30 - 11.21 * $0.14 = +$2.63 vs NoSSD.
+Eco3x extra earnings - extra energy costs = 0.10 * $30 - 4.79 * $0.14  = +$2.33 vs NoSSD.
+Pro4x extra earnings - extra energy costs = 0.16 * $30 - 11.21 * $0.14 = +$3.23 vs NoSSD.
 ```
-These figures highlight Pro4x as a strong contender, offering a 38.7% higher daily return than NoSSD's C15 ($9.42 per day vs $6.79 per day), despite a higher energy consumption.
+These figures highlight Pro4x as a strong contender, offering a 44% higher daily return than NoSSD's C15 ($10.62 per day vs $7.39 per day), despite a higher energy consumption.
 
 To enhance your decision-making process, the chart below serves as a guide for evaluating risks and potential returns. For those who prefer a cautious approach, opt for a plot format that remains viable at lower XCH prices. 
 
@@ -89,9 +89,7 @@ This mix lets you use all of your storage space wisely, filling it with Eco3x an
 
 DrPlotter has been a labor of love and dedication that has captivated my attention for over two years. What began as a passion project has transformed into a committed effort to advance the field of Chia plot compression and support the strengths of the Chia blockchain.
 
-To continue this journey, I've stepped away from incorporating a randomized fee or possibly changing fee on farming revenue. Instead, a minimal portion of user resources is allocated to support my own plots and farm. Most importantly, all the performance stats I present already factor in these contributions – ensuring that there are no hidden costs. What you see is precisely what you get. This contribution structure is steadfast and unchanging, ensuring that the results you see now will remain consistent in the future. This stability offers ease in planning and peace of mind.
-
-While details of this technology are confidential, my commitment remains to deliver an efficient and cutting-edge tool for Chia farming.
+To continue this journey, I've stepped away from incorporating a randomized fee or possibly changing fee on farming revenue. Instead, each DrPlot you create contains a small set of developer proofs, which will occasionally be solved just like one of your own proofs. However, these solved developer proofs are then directed to my farmer to create the block, and not yours. Most importantly, all the performance stats I present already factor in these contributions – ensuring that there are no hidden costs. What you see is precisely what you get. This contribution structure is steadfast and unchanging, ensuring that the results you see now will remain consistent in the future. This stability offers ease in planning and peace of mind. A more detailed overview how this works can be seen in the video section: [Note on Developer Fees](https://www.youtube.com/watch?v=hQTV7foIRHo&t=559s)
 
 
 # How it works
@@ -101,13 +99,15 @@ While details of this technology are confidential, my commitment remains to deli
 </p>
 
 
-**DrPlotter** is the plotting tool that creates Eco3x and Pro4x plots. Given your farmer and pool public keys, it produces "DrPlots" using write-once technology directly to your HDD, typically in 6-7 minutes per plot. No SSD required.
+**DrPlotter** is the plotting tool that creates Eco3x and Pro4x plots. Given your farmer and pool public keys, it produces "DrPlots" using write-once technology directly to your HDD, typically in 5-7 minutes per plot. No SSD required.
 
 **DrChia harvester**, in line with the Chia harvesting protocol, seamlessly integrates with your existing farmer setup. It reads existing chia supported plots and your new DrPlots. DrPlot entries requiring proof solving are sent to the Solver Server. Once solved, these proofs are relayed back to the DrChia harvester and then passed onto your Chia farmer, ensuring smooth and consistent operation.
 
 **DrSolver** leverages your GPU power to solve proofs for your plot entries. Using a unique token system, DrSolvers can be deployed in various locations without compromising efficiency or security.
 
 **Solver Server** is vital in enhancing computational efficiency and consistently reducing proof times. It alleviates bottlenecks and manages load during peak periods at signage points for your DrPlots by proportionally allocating compute resources according to DrPlot count, ensuring efficient and equitable proof resolution across the network.
+
+For a more complete overview, see the video [How it works](https://www.youtube.com/watch?v=hQTV7foIRHo&t=463s).
 
 
 # Using DrPlotter
@@ -217,9 +217,9 @@ Generated client token: kWq9NXkHQ75zGhebkJzriknBs0IOnDux5kIqOd0aJioM6HSR
 - **Temporary Setting**: For a temporary setup in a bash shell, use:
      
     ```
-    export DRPLOTTER_CLIENT_TOKEN='[Your Unique Token]'
+    export DRPLOTTER_CLIENT_TOKEN='Your_Unique_Token'
     ```
-    Replace '[Your Unique Token]' with the token generated in the previous step.
+    Replace 'Your_Unique_Token' with the token generated in the previous step.
 - **Persistent Setup:**
 
   Edit your `.bashrc` file for a more persistent solution:
@@ -228,7 +228,7 @@ Generated client token: kWq9NXkHQ75zGhebkJzriknBs0IOnDux5kIqOd0aJioM6HSR
   ```
   Add the following line to the end of the file (with your actual token):
   ```
-  export DRPLOTTER_CLIENT_TOKEN='[Your Unique Token]'
+  export DRPLOTTER_CLIENT_TOKEN='Your_Unique_Token'
   ```
   Save and exit, then apply changes with:
   ```
@@ -372,3 +372,12 @@ To check your DrPlots are submitting proofs, it's recommended to join a pool and
 - **Troubleshooting:** In case you notice discrepancies in the expected pool points, the low difficulty setting can help in detecting any problems early.
 
 As a result, you can effectively monitor and ensure that your drplots are being farmed correctly and submitting proofs to the pool as anticipated.
+
+## Join Our Community
+
+For real-time support, questions, or to engage with the DrPlotter community, please join the official DrPlotter Discord channel. Whether you're looking for help, interested in contributing, or just want to discuss Chia farming strategies, it's the perfect place to connect with fellow users and the developer.
+
+👉 [Join the DrPlotter Discord Community](https://discord.gg/Uk3wQ9ztev)
+
+We look forward to seeing you there!
+
