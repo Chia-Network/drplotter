@@ -372,3 +372,12 @@ To check your DrPlots are submitting proofs, it's recommended to join a pool and
 - **Troubleshooting:** In case you notice discrepancies in the expected pool points, the low difficulty setting can help in detecting any problems early.
 
 As a result, you can effectively monitor and ensure that your drplots are being farmed correctly and submitting proofs to the pool as anticipated.
+
+## Join Our Community
+
+For real-time support, questions, or to engage with the DrPlotter community, please join the official DrPlotter Discord channel. Whether you're looking for help, interested in contributing, or just want to discuss Chia farming strategies, it's the perfect place to connect with fellow users and the developer.
+
+👉 [Join the DrPlotter Discord Community](https://discord.gg/Uk3wQ9ztev)
+
+We look forward to seeing you there!
+
