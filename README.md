@@ -52,6 +52,7 @@ The performance of these solutions is contrasted with NoSSD's leading C15 plot f
 </p>
 
 <sub>1: Hardware Cost includes expenses for disks and GPUs, calculated at $16 per installed TB and $1600 for a 4090 GPU. GPU costs are adjusted to utilization—e.g., at 38% utilization, only 38% of the GPU cost is counted. This approach ensures costs are proportionally represented for a fair comparison within a $10,000 investment.</sub>
+<sub>2: For NoSSD a 3.5% is deducted from rewards. Since DrPlotter fees are already incorporated into it's structure there's no need for any additional deductions.</sub>
 
 By evaluating the potential xch price against energy costs, it's clear that Eco3x and Pro4x are compelling for those seeking profitability over minimal energy use. For example, if your electricity costs are $0.14 per kWh with XCH priced at $30:
 
