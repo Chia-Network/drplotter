@@ -96,17 +96,17 @@ To continue this journey, I've stepped away from incorporating a randomized fee 
 # How it works
 
 <p align="center" alt="Diagram of DrPlotter components">
-  <img src="images/drplotter-components.png" />
+  <img src="images/drplotter-solver-harvester-server-farmer.png" />
 </p>
 
 
 **DrPlotter** is the plotting tool that creates Eco3x and Pro4x plots. Given your farmer and pool public keys, it produces "DrPlots" using write-once technology directly to your HDD, typically in 5-7 minutes per plot. No SSD required.
 
-**DrChia harvester**, in line with the Chia harvesting protocol, seamlessly integrates with your existing farmer setup. It reads existing chia supported plots and your new DrPlots. DrPlot entries requiring proof solving are sent to the Solver Server. Once solved, these proofs are relayed back to the DrChia harvester and then passed onto your Chia farmer, ensuring smooth and consistent operation.
+**DrChia Harvester**, in line with the Chia harvesting protocol, seamlessly integrates with your existing farmer setup. It reads existing chia supported plots and your new DrPlots. DrPlot entries requiring proof solving are sent to the DrServer. Once solved, these proofs are relayed back to the DrChia harvester and then passed onto your Chia farmer.
 
-**DrSolver** leverages your GPU power to solve proofs for your plot entries. Using a unique token system, DrSolvers can be deployed in various locations without compromising efficiency or security.
+**DrSolver** leverages your GPU power to solve proofs for your compressed DrPlot entries.
 
-**Solver Server** is vital in enhancing computational efficiency and consistently reducing proof times. It alleviates bottlenecks and manages load during peak periods at signage points for your DrPlots by proportionally allocating compute resources according to DrPlot count, ensuring efficient and equitable proof resolution across the network.
+**DrServer** is the central hub on your local network that connects all your harvesters and DrSolver's together. It efficiently manages and distributes all the tasks needed across all your harvesters and DrSolvers, to ensure a smooth running system for relaying proofs back to your farmer. 
 
 For a more complete overview, see the video [How it works](https://www.youtube.com/watch?v=hQTV7foIRHo&t=463s).
 
@@ -122,6 +122,7 @@ For a more complete overview, see the video [How it works](https://www.youtube.c
 - [Verify your DrPlots are submitting proofs](#verify-your-drplots-are-submitting-proofs)
 
 ## Minimum Requirements
+
 DrPlotter Minimum Requirements:
 - 24GB nvidia 3090 / A5000 / 4090
 - 128GB DDR4 RAM
@@ -137,6 +138,10 @@ DrChia Harvester Minimum Requirements:
 - ~4GB RAM for every 1PiB of raw disk space.
 - Ubuntu / Debian based system
 
+DrServer Minimum Requirements:
+- ~1GB RAM
+- Ubuntu / Debian based system
+
 ## Installation
 
 Make sure you meet the minimum requirements above. Then, download the latest .deb package from the releases page.
@@ -147,13 +152,8 @@ In the command line, run dpkg on your downloaded file, for example:
 sudo dpkg -i drplotter_0.9.0_amd64.deb 
 ```
 
-This will install drplotter, drsolver, and drchia for the harvester in the /usr/bin/ directory.
+This will install drplotter, drsolver, drserver, and drchia for the harvester in the /usr/bin/ directory.
 
-You'll also need to install the protobuf library for drsolver:
-
-```
-sudo apt-get install libprotobuf23
-```
 
 If at any point you want to remove drplotter, to uninstall run:
 
@@ -198,70 +198,134 @@ To see more plotting options, run:
 drplotter -h
 ```
 
-## Setting up your DRPLOTTER_CLIENT_TOKEN
+## Harvesting DrPlots
 
-DrPlotter requires a unique client token for authentication. This token links your drsolvers and harvesters. **Use the same token** across all your machines running drchia harvesters and drsolvers.
+### 1 . Start DrServer
 
-### 1. Generate your token
-
-Run the following command to generate a new client token:
-```
-drsolver --generate-token
-```
-This command creates a new authentication token. You'll see output similar to this (note that your token will be different):
+DrServer is the central hub on your network that connects all the `drchia harvester` and `drsolver` instances. You only need a single instance of DrServer accessible on your network. Run the following command to start:
 
 ```
-Generated client token: kWq9NXkHQ75zGhebkJzriknBs0IOnDux5kIqOd0aJioM6HSR
+drserver
 ```
- 
-### 2. Set your DRPLOTTER_CLIENT_TOKEN environment variable
+
+The default port is 8080, and you check it's running by opening a web browser to your local ip and port like so: `http://localhost:8080/`. If you want to run on a specific port, use:
+
+```
+drserver --port 8080
+```
+
+### 2. Set your DRSERVER_IP_ADDRESS environment variables
+
+Take note of what local ip address your drserver is running on. For every different machine you have running DrPlotter services, set the environment variable `DRSERVER_IP_ADDRESS`.
+
 - **Temporary Setting**: For a temporary setup in a bash shell, use:
      
     ```
-    export DRPLOTTER_CLIENT_TOKEN='Your_Unique_Token'
+    export DRSERVER_IP_ADDRESS='Your_drserver_ip_address'
     ```
-    Replace 'Your_Unique_Token' with the token generated in the previous step.
+    Replace 'Your_drserver_ip_address' with ip address of your machine running drserver. If you used a different port than the default, append the port after a semi-colon to the ip address, e.g. `192.168.0.2:2323` for setting the port to `2323`.
+
 - **Persistent Setup:**
 
   Edit your `.bashrc` file for a more persistent solution:
   ```
   nano ~/.bashrc
   ```
-  Add the following line to the end of the file (with your actual token):
+  Add the following line to the end of the file (with your actual drserver ip address):
   ```
-  export DRPLOTTER_CLIENT_TOKEN='Your_Unique_Token'
+  export DRSERVER_IP_ADDRESS='Your_drserver_ip_address'
   ```
   Save and exit, then apply changes with:
   ```
   source ~/.bashrc
   ```
 
-### 3. Verify your token is set
-To verify that your token is set correctly, you can run:
+### 3. Setup your DrChia harvesters
+
+-  If you're on a new install, first run:
+
+   ```
+   drchia init
+   ```
+- Then, you need to copy in your ca certificates from your **farmer machine**, these are usually found at `~/.chia/mainnet/config/ssl/ca`. These let the drchia harvester securely talk with your farmer. Initialize these with your harvester:
+
+   ```
+   drchia init -c /path/to/your/farmers/ca/certificates
+   ``` 
+
+- Edit the chia config file on your harvester. In the example below we use nano:
+
+   ```
+   nano ~/.chia/mainnet/config/config.yaml
+   ```
+ 
+   Look for **farmer_peer:** under the **harvester:** section, and edit the ip to point to your farmer ip.
+    e.g.
+    ``` 
+    harvester:
+      farmer_peer:
+        host: <Farmer IP Address>  <--- set to your farmer ip address, e.g. 192.168.1.23
+        port: 8447
+    ```
+   Don't forget to save your changes.
+
+### 4. Connect your DrChia Harvester
+
+To verify that your machine knows the ip address of your `drserver`, you can run:
 ```
-echo $DRPLOTTER_CLIENT_TOKEN
+echo $DRPLOTTER_IP_ADDRESS
 ```
-and check that the output matches your token.
-
-> [!CAUTION]
-> Keep your token secure and do not share it in public forums
+and check that the output matches the ip address of your `drserver`.
 
 
-## Run your DrSolver
+Before you run your harvester, let's change the config so that you can see log outputs to check it's working. Run:
 
-Once your DRPLOTTER_CLIENT_TOKEN is set in your environment (see [previous section](#setting-up-your-drplotter_client_token)), run:
+```
+drchia configure --log-level INFO
+```
+And now run:
+
+```
+drchia start harvester -r
+```
+
+If all is well, you can now check your logs in `~/.chia/mainnet/log/debug.log`
+
+If you see logs similar to this:
+
+```
+2024-01-24T01:05:55.731 harvester drplotter               : INFO     Harvesting 1368 drplots with on disk size 36.82 TiB, after decompression 130.58 eTiB, extra rewards 3.55x
+```
+
+Then congrats, your drchia harvester has found your drplots and is now ready to harvest.
+
+You'll also notice there are some warning logs, if you haven't yet setup a DrSolver to use the GPU to decmpress all those proofs. That's what we'll do next.
+
+
+### 5. Connect your DrSolvers
+
+A DrSolver can run on the same system as your `drchia harvester` or the `drserver`, as long as it has it's own dedicated GPU.
+
+Let's first verify that your machine knows the ip address of your `drserver`, you can run:
+```
+echo $DRPLOTTER_IP_ADDRESS
+```
+and check that the output matches the ip address of your drserver.
+
+If that looks good, then running a drsolver is as simple as:
 ```
 drsolver
 ```
-DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token. Below is an example output:
+
+DrSolver will run and connect to the `drserver`. Once connected, it will display your connected harvesters and solvers that are all synced with the `drserver`. Below is an example output:
 
 ```
-                            DrPlotter Solver v0.9.0
+                            DrPlotter Solver v0.10.0
 
 DrPlotter Farm Status
 --------------------------------------------------------------------------------
   Status: CONNECTED                                             Uptime: 02:23:30
-  Client Token: kWq9NXkHQ75zGheb...
+  DrServer: 192.168.2.44:8080
 
   Total Harvesters: 2                                           Total Solvers: 1
 
@@ -283,86 +347,9 @@ Commands: [Q]uit
 
 While DrSolver is running, monitor the 5-minute and 15-minute "load" indicators to gauge the current capacity usage of your GPU as a percentage of its total capacity. 
 
-## Setup and Run your DrChia Harvester
- 
-On your harvester system, set the DRPLOTTER_CLIENT_TOKEN environment variable to the one you [generated with your DrSolver](#setting-up-your-drplotter_client_token).
 
-### System with Existing Chia Harvester
 
-> [!IMPORTANT]
-> Chia Network recently released new harvesters that break changes in config.yaml files. If you have trouble with this section on an existing chia harvester, remove your ~/.chia/ directory and setup again using drchia init instead as explained in the next section.
- 
-If you already have a chia setup for your system, you can simply run:
-
-```
-drchia start harvester -r
-```
-
-Make sure to include the -r to stop any previous harvesters and replace them with the drchia harvester.
-
-Add any new plot directories you've plotted, as you would with chia's software, e.g.:
-
-```
-drchia plots add -d /your/plots/directory
-```
-
-### New System as Remote Harvester
-
-If you don't have any harvester setup on your machine, you can follow the [chia official guide to setting up a remote harvester](https://docs.chia.net/farming-on-many-machines/) but use the `drchia` command instead of the `chia` command:
- 
--  First, run:
-
-   ```
-   drchia init
-   ```
-
-- Then, you need to copy in your ca certificates from your **farmer machine**, these are usually found at `~/.chia/mainnet/config/ssl/ca`. Initialize these with your harvester:
-
-   ```
-   drchia init -c /path/to/your/farmers/ca/certificates
-   ```
-
-- Edit the chia config file on your harvester.
-
-   ```
-   ~/.chia/mainnet/config/config.yaml
-   ```
- 
-   Look for **farmer_peer:** under the **harvester:** section, and edit the ip to point to your farmer ip.
-    e.g.
-    ``` 
-    harvester:
-      farmer_peer:
-        host: <Farmer IP Address>  <--- set to your farmer ip address, e.g. 192.168.1.23
-        port: 8447
-    ```
-   Don't forget to save your changes.
- 
-Before you run your harvester, let's change the config so that you can see log outputs to check it's working. Run:
-
-```
-drchia configure --log-level INFO
-```
-And now run:
-
-```
-drchia start harvester -r
-```
-
-If all is well, you can now check your logs in ~/.chia/mainnet/log/debug.log
-
-If you see logs similar to this:
-
-```
-2024-01-24T01:05:55.731 harvester drplotter               : INFO     Harvesting 1368 drplots with on disk size 36.82 TiB, after decompression 130.58 eTiB, extra rewards 3.55x
-```
-
-Then congrats, your drchia harvester has found your plots and should be harvesting your drplots.
-
-> [!NOTE]
-> If you have not yet connected a drsolver with your same DRPLOTTER_CLIENT_TOKEN, you will see a warning or error message in your harvester logs. Once your drsolver starts running, the harvester will then connect to the server and start sending plots to your solvers.
-
-## Verify your DrPlots are Submitting Proofs
+## 6. Verify your DrPlots are Submitting Proofs
 
 To check your DrPlots are submitting proofs, it's recommended to join a pool and adjust the difficulty setting of your pool plots to the lowest possible value, such as 1. This approach is beneficial for several reasons:
 
