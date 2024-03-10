@@ -215,6 +215,9 @@ The default port is 8080, and you check it's running by opening a web browser to
 drserver --port 8080
 ```
 
+> [!IMPORTANT]  
+> Keep connected to drplotter.com to support development and avoid a temporary 10% drop in plot rewards. This measure, necessary for developer fee collection, ensures service continuity even if drplotter.com goes down. It's temporary until CHIP-22 integration is complete.
+
 ### 2. Set your DRSERVER_IP_ADDRESS environment variables
 
 Take note of what local ip address your drserver is running on. For every different machine you have running DrPlotter services, set the environment variable `DRSERVER_IP_ADDRESS`.
