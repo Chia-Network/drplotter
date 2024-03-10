@@ -124,14 +124,15 @@ For a more complete overview, see the video [How it works](https://www.youtube.c
 ## Minimum Requirements
 
 DrPlotter Minimum Requirements:
-- 24GB nvidia 3090 / A5000 / 4090
-- 128GB DDR4 RAM
+- 24GB nvidia 3090 / A5000 / 4090 per instance.
+- 128GB DDR4 RAM per instance.
 - motherboard with a PCIE 4.0 x 16 slot
 - 64 bit processor (onboard GPU a bonus)
 - Ubuntu / Debian based system
 
 DrSolver Minimum Requirements:
-- 24GB nvidia 3090.
+- 64MB RAM per instance.
+- 24GB nvidia 3090 per instance.
 - Ubuntu / Debian based system
 
 DrChia Harvester Minimum Requirements:
@@ -139,7 +140,7 @@ DrChia Harvester Minimum Requirements:
 - Ubuntu / Debian based system
 
 DrServer Minimum Requirements:
-- ~1GB RAM
+- ~16MB RAM
 - Ubuntu / Debian based system
 
 ## Installation
@@ -273,7 +274,7 @@ Take note of what local ip address your drserver is running on. For every differ
 
 To verify that your machine knows the ip address of your `drserver`, you can run:
 ```
-echo $DRPLOTTER_IP_ADDRESS
+echo $DRSERVER_IP_ADDRESS
 ```
 and check that the output matches the ip address of your `drserver`.
 
@@ -308,7 +309,7 @@ A DrSolver can run on the same system as your `drchia harvester` or the `drserve
 
 Let's first verify that your machine knows the ip address of your `drserver`, you can run:
 ```
-echo $DRPLOTTER_IP_ADDRESS
+echo $DRSERVER_IP_ADDRESS
 ```
 and check that the output matches the ip address of your drserver.
 
