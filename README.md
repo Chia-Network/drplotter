@@ -225,9 +225,9 @@ Take note of what local ip address your drserver is running on. For every differ
 - **Temporary Setting**: For a temporary setup in a bash shell, use:
      
     ```
-    export DRSERVER_IP_ADDRESS='Your_drserver_ip_address'
+    export DRSERVER_IP_ADDRESS='Your_drserver_ip_address:port'
     ```
-    Replace 'Your_drserver_ip_address' with ip address of your machine running drserver. If you used a different port than the default, append the port after a semi-colon to the ip address, e.g. `192.168.0.2:2323` for setting the port to `2323`.
+    Replace 'Your_drserver_ip_address:port' with ip address and port of your machine running drserver. Append the port after a semi-colon to the ip address, e.g. `192.168.0.2:8080` for setting the port to `8080`.
 
 - **Persistent Setup:**
 
@@ -237,7 +237,7 @@ Take note of what local ip address your drserver is running on. For every differ
   ```
   Add the following line to the end of the file (with your actual drserver ip address):
   ```
-  export DRSERVER_IP_ADDRESS='Your_drserver_ip_address'
+  export DRSERVER_IP_ADDRESS='Your_drserver_ip_address:port'
   ```
   Save and exit, then apply changes with:
   ```
