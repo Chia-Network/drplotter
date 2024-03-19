@@ -365,10 +365,6 @@ Then congrats, your drchia harvester has found your plots and should be harvesti
 > [!NOTE]
 > If you have not yet connected a drsolver with your same DRPLOTTER_CLIENT_TOKEN, you will see a warning or error message in your harvester logs. Once your drsolver starts running, the harvester will then connect to the server and start sending plots to your solvers.
 
-## Using a local DrServer
-
-Once you are comfortable using the token system and seeing your plots submitting proofs, consider adding a local `drserver` for improved performance, better logging, and continous runtime even in the event that drplotter.com goes offline. See the [wiki on using drserver](https://github.com/drnick23/drplotter/wiki/DrServer).
-
 ## Verify your DrPlots are Submitting Proofs
 
 To check your DrPlots are submitting proofs, it's recommended to join a pool and adjust the difficulty setting of your pool plots to the lowest possible value, such as 1. This approach is beneficial for several reasons:
@@ -380,6 +376,10 @@ To check your DrPlots are submitting proofs, it's recommended to join a pool and
 - **Troubleshooting:** In case you notice discrepancies in the expected pool points, the low difficulty setting can help in detecting any problems early.
 
 As a result, you can effectively monitor and ensure that your drplots are being farmed correctly and submitting proofs to the pool as anticipated.
+
+## Using a local DrServer
+
+Once you are comfortable using the token system and seeing your plots submitting proofs, consider adding a local `drserver` for improved performance, better logging, and continous runtime even in the event that drplotter.com goes offline. See the [wiki on using drserver](https://github.com/drnick23/drplotter/wiki/DrServer).
 
 ## Join Our Community
 
