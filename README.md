@@ -144,7 +144,7 @@ Make sure you meet the minimum requirements above. Then, download the latest .de
 In the command line, run dpkg on your downloaded file, for example:
 
 ```
-sudo dpkg -i drplotter_0.9.0_amd64.deb 
+sudo dpkg -i drplotter_0.10.0_amd64.deb 
 ```
 
 This will install drplotter, drsolver, and drchia for the harvester in the /usr/bin/ directory.
@@ -256,7 +256,7 @@ drsolver
 DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token. Below is an example output:
 
 ```
-                            DrPlotter Solver v0.9.0
+                            DrPlotter Solver v0.10.0
 
 DrPlotter Farm Status
 --------------------------------------------------------------------------------
@@ -290,7 +290,7 @@ On your harvester system, set the DRPLOTTER_CLIENT_TOKEN environment variable to
 ### System with Existing Chia Harvester
 
 > [!IMPORTANT]
-> Chia Network recently released new harvesters that break changes in config.yaml files. If you have trouble with this section on an existing chia harvester, remove your ~/.chia/ directory and setup again using drchia init instead as explained in the next section.
+> Chia Network recently released new update 2.2.x that breaks changes in the harvester<->farmer protocol and config.yaml files. If you have trouble with this section on an existing chia harvester, remove your ~/.chia/ directory and setup again using drchia init instead as explained in the next section.
  
 If you already have a chia setup for your system, you can simply run:
 
@@ -300,17 +300,14 @@ drchia start harvester -r
 
 Make sure to include the -r to stop any previous harvesters and replace them with the drchia harvester.
 
-Add any new plot directories you've plotted, as you would with chia's software, e.g.:
 
-```
-drchia plots add -d /your/plots/directory
-```
 
 ### New System as Remote Harvester
 
-If you don't have any harvester setup on your machine, you can follow the [chia official guide to setting up a remote harvester](https://docs.chia.net/farming-on-many-machines/) but use the `drchia` command instead of the `chia` command:
- 
--  First, run:
+> [!IMPORTANT] 
+The latest chia farmer 2.2.x has breaking changes in the harvester<->farmer protocol. You must stay on a chia farmer 2.1.x in order for `drchia harvester` to connect.
+
+Currently, you need a chia farmer/node on a seperate machine or VM, and connect to it remotely using `drchia`. On the machine for your `drchia` harvester, first run:
 
    ```
    drchia init
@@ -337,7 +334,13 @@ If you don't have any harvester setup on your machine, you can follow the [chia 
         port: 8447
     ```
    Don't forget to save your changes.
- 
+
+Add any new plot directories you've plotted, as you would with chia's software, e.g.:
+
+```
+drchia plots add -d /your/plots/directory
+```
+
 Before you run your harvester, let's change the config so that you can see log outputs to check it's working. Run:
 
 ```
@@ -361,6 +364,10 @@ Then congrats, your drchia harvester has found your plots and should be harvesti
 
 > [!NOTE]
 > If you have not yet connected a drsolver with your same DRPLOTTER_CLIENT_TOKEN, you will see a warning or error message in your harvester logs. Once your drsolver starts running, the harvester will then connect to the server and start sending plots to your solvers.
+
+## Using a local DrServer
+
+Once you are comfortable using the token system and seeing your plots submitting proofs, consider adding a local `drserver` for improved performance, better logging, and continous runtime even in the event that drplotter.com goes offline. See the [wiki on using drserver](https://github.com/drnick23/drplotter/wiki/DrServer).
 
 ## Verify your DrPlots are Submitting Proofs
 
