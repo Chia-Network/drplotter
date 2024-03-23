@@ -144,7 +144,7 @@ Make sure you meet the minimum requirements above. Then, download the latest .de
 In the command line, run dpkg on your downloaded file, for example:
 
 ```
-sudo dpkg -i drplotter_0.10.0_amd64.deb 
+sudo dpkg -i drplotter_0.11.0_amd64.deb 
 ```
 
 This will install drplotter, drsolver, and drchia for the harvester in the /usr/bin/ directory.
@@ -256,7 +256,7 @@ drsolver
 DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token. Below is an example output:
 
 ```
-                            DrPlotter Solver v0.10.0
+                            DrPlotter Solver v0.11.0
 
 DrPlotter Farm Status
 --------------------------------------------------------------------------------
