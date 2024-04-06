@@ -144,16 +144,10 @@ Make sure you meet the minimum requirements above. Then, download the latest .de
 In the command line, run dpkg on your downloaded file, for example:
 
 ```
-sudo dpkg -i drplotter_0.11.0_amd64.deb 
+sudo dpkg -i drplotter_0.12.0_amd64.deb 
 ```
 
 This will install drplotter, drsolver, and drchia for the harvester in the /usr/bin/ directory.
-
-You'll also need to install the protobuf library for drsolver:
-
-```
-sudo apt-get install libprotobuf23
-```
 
 If at any point you want to remove drplotter, to uninstall run:
 
@@ -256,7 +250,7 @@ drsolver
 DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token. Below is an example output:
 
 ```
-                            DrPlotter Solver v0.11.0
+                            DrPlotter Solver v0.12.0
 
 DrPlotter Farm Status
 --------------------------------------------------------------------------------
@@ -290,7 +284,7 @@ On your harvester system, set the DRPLOTTER_CLIENT_TOKEN environment variable to
 ### System with Existing Chia Harvester
 
 > [!IMPORTANT]
-> Chia Network recently released new update 2.2.x that breaks changes in the harvester<->farmer protocol and config.yaml files. If you have trouble with this section on an existing chia harvester, remove your ~/.chia/ directory and setup again using drchia init instead as explained in the next section.
+> The drchia harvester from version 0.11.0 onwards only supports the latest Chia farmer releases with update 2.2.x or later.
  
 If you already have a chia setup for your system, you can simply run:
 
@@ -305,7 +299,7 @@ Make sure to include the -r to stop any previous harvesters and replace them wit
 ### New System as Remote Harvester
 
 > [!IMPORTANT] 
-The latest chia farmer 2.2.x has breaking changes in the harvester<->farmer protocol. You must stay on a chia farmer 2.1.x in order for `drchia harvester` to connect.
+You must have a chia farmer with version 2.2.x or later in order for `drchia harvester` to connect.
 
 Currently, you need a chia farmer/node on a seperate machine or VM, and connect to it remotely using `drchia`. On the machine for your `drchia` harvester, first run:
 
