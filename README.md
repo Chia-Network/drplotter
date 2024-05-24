@@ -100,9 +100,8 @@ For a more complete overview, see the video [How it works](https://www.youtube.c
 - Make sure you meet the [minimum requirements](#minimum-requirements)
 - Download and [install the software](#installation)
 - [Start plotting](#plotting) with the DrPlotter tool.
-- [Set your client token](#setting-up-your-drplotter_client_token)
-- [Run your DrSolvers](#run-your-drsolver)
-- [Setup and run your DrChia harvester](#setup-and-run-your-drchia-harvester) with your existing chia farmer.
+- [Run your DrSolvers](#1-start-drserver)
+- [Setup and run your DrChia harvester](#3-setup-your-drchia-harvesters) with your existing chia farmer.
 - [Verify your DrPlots are submitting proofs](#verify-your-drplots-are-submitting-proofs)
 
 ## Minimum Requirements
@@ -187,7 +186,7 @@ drplotter -h
 
 Note that all the components shown below could be run on the same machine locally, or split across multiple machines or VMs.
 
-### 1 . Start DrServer
+### 1. Start DrServer
 
 DrServer is the central hub on your network that connects all the `drchia harvester` and `drsolver` instances. You only need a single instance of DrServer accessible on your network. Run the following command to start:
 
