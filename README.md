@@ -4,9 +4,9 @@
 
 # DrPlotter: Your Go-To for Maximum ROI Chia Farming
 
-DrPlotter is an advanced, energy-efficient GPU plotter, solver, and harvester designed for the Chia Blockchain, with break-through rewards and efficiency optimized for consumer-grade hardware. See the video on the [Introduction to DrPlotter](https://www.youtube.com/watch?v=hQTV7foIRHo&t=3s).
+DrPlotter is an advanced, energy-efficient GPU plotter, solver, and harvester designed for the Chia Blockchain, with break-through rewards and efficiency optimized for consumer-grade hardware.
 
-- **Up to +413% Rewards**: Two compression modes offer a balance between optimal efficiency and optimal cost per eTB for maximum ROI.
+- **Up to +442% Rewards**: Two compression modes offer a balance between optimal efficiency and optimal cost per eTB for maximum ROI.
 - **Enhanced Security**: Relies solely on public farmer keys, letting you safeguard your private keys.
 - **Effortless Remote GPU Use**: Enjoy a streamlined process for submitting proofs and the flexibility to use your GPU remotely with ease.
 - **Supporting the Chia Ecosystem**: By seamlessly integrating with the official Chia Farmers, DrPlotter plays a part in keeping the Chia network strong and decentralized.
@@ -14,7 +14,7 @@ DrPlotter is an advanced, energy-efficient GPU plotter, solver, and harvester de
 Offering Eco3x for enhanced energy efficiency and Pro4x for maximum plot size reduction you can achieve higher ROI than any other solution.
 
 <p align="center" alt="DrPlotter eco3x and pro4x summary">
-  <img src="images/drplotter-plots-summary.png" />
+  <img src="images/drplotter-plots-summary-nodevfee.png" />
 </p>
 
 <sup>1: The 512 plot filter will be active until June 2024. During this period, the capacities supported by the 256 filter will be doubled.</sup>
@@ -34,7 +34,7 @@ Eco3x compression offers an energy-efficient solution for managing chia farms, e
 
 ## The Pro4x Advantage
 
-Pro4x compression significantly reduces hard drive needs for your plots to less than a quarter compared to uncompressed plots, marking a major leap in cost and space savings. By matching your hard drive capacity with your GPU's power, Pro4x achieves unmatched ROI. The table shows that with 4090 GPUs at full capacity, even with the challenging 256 plot filter, you can efficiently run a 1.6 ePiB farm at just 38% the cost of a setup using regular plots. Notably, Pro4x enables over 1 ePiB of plots in a consumer PC case using only 14 hard drives, compared to the 56 drives a large server setup would need, enhancing space utilization, cost-effectiveness, and management simplicity.
+Pro4x compression significantly reduces hard drive needs for your plots to less than a quarter compared to uncompressed plots, marking a major leap in cost and space savings. By matching your hard drive capacity with your GPU's power, Pro4x achieves unmatched ROI. The table shows that with 4090 GPUs at full capacity on the 256 plot filter, you can efficiently run a 880 eTiB farm at just 35% the cost of a setup using regular plots. Notably, Pro4x enables over 1 ePiB of plots in a consumer PC case using only 14 hard drives, compared to the 56 drives a large server setup would need, enhancing space utilization, cost-effectiveness, and management simplicity.
 
 <p align="center" alt="Table comparing pro4x advantages to regular plots">
   <img src="images/pro4x-advantage.png" />
@@ -45,31 +45,22 @@ Pro4x compression significantly reduces hard drive needs for your plots to less 
 ## Strategic Efficiency: Eco3x and Pro4x vs. NoSSD's C15
 In the competitive landscape of chia farming, striking the right balance between energy consumption and cost per reward is key. Chia farming involves substantial initial setup costs but low ongoing expenses. The Eco3x and Pro4x solutions, developed with these economic dynamics in mind, optimize for a slight increase in energy use to significantly reduce the cost per reward across various setups and market conditions, offering a financial advantage.
 
-The performance of these solutions is contrasted with NoSSD's leading C15 plot format under a fixed $10,000 budget. Analysis shows that both Eco3x and Pro4x not only improve chia earnings but do so with an acceptable increase in energy consumption. Specifically, Eco3x delivers an extra 0.10 xch for 4.79 kWh more than C15, while Pro4x adds 0.16 xch for an additional 11.21 kWh.
+The performance of these solutions is contrasted with NoSSD's leading C15 plot format under a fixed $10,000 budget. Analysis shows that both Eco3x and Pro4x not only improve chia earnings but do so with an acceptable increase in energy consumption. Specifically, Eco3x delivers an extra 0.07 xch for 4.79 kWh more than C15, while Pro4x adds 0.10 xch for an additional 11.21 kWh.
 
 <p align="center" alt="DrPlotter Eco3x and Pro4x vs NoSSD C15">
-  <img src="images/Eco3x-Pro4x-vs-NoSSDC15.png" />
+  <img src="images/Eco3x-Pro4x-vs-NoSSDC15-nodevfee.png" />
 </p>
 
 <sub>1: Hardware Cost includes expenses for disks and GPUs, calculated at $16 per installed TB and $1600 for a 4090 GPU. GPU costs are adjusted to utilization—e.g., at 38% utilization, only 38% of the GPU cost is counted. This approach ensures costs are proportionally represented for a fair comparison within a $10,000 investment.</sub>
-<sub>2: For NoSSD a 3.5% is deducted from rewards. Since DrPlotter fees are already incorporated into it's structure there's no need for any additional deductions.</sub>
+<sub>2: For NoSSD a 3.5% fee from NoSSD is deducted from rewards.</sub>
 
 By evaluating the potential xch price against energy costs, it's clear that Eco3x and Pro4x are compelling for those seeking profitability over minimal energy use. For example, if your electricity costs are $0.14 per kWh with XCH priced at $30:
 
 ```
-Eco3x extra earnings - extra energy costs = 0.10 * $30 - 4.79 * $0.14  = +$2.33 vs NoSSD.
-Pro4x extra earnings - extra energy costs = 0.16 * $30 - 11.21 * $0.14 = +$3.23 vs NoSSD.
+Eco3x extra earnings - extra energy costs = 0.07 * $31 - 4.79 * $0.14  = +$1.49 vs NoSSD.
+Pro4x extra earnings - extra energy costs = 0.10 * $31 - 11.21 * $0.14 = +$1.53 vs NoSSD.
 ```
-These figures highlight Pro4x as a strong contender, offering a 44% higher daily return than NoSSD's C15 ($10.62 per day vs $7.39 per day), despite a higher energy consumption.
-
-To enhance your decision-making process, the chart below serves as a guide for evaluating risks and potential returns. For those who prefer a cautious approach, opt for a plot format that remains viable at lower XCH prices. 
-
-<p align="center" alt="DrPlotter Eco3x and Pro4x vs NoSSD C15">
-  <img src="images/Consider-Eco3x-Pro4x-NoSSDC15-kWh.png" />
-</p>
-
-> [!IMPORTANT]  
-> The chart provided is tailored to reflect scenarios involving the use of 4090 GPUs, as detailed in the hardware setup section above.
+These figures highlight Pro4x as a strong contender, offering a 50% higher daily return than NoSSD's C15 ($4.57 profit per day vs $3.04 profit per day), despite a higher energy consumption.
 
 ## Get the Most Out of Your GPU with Eco3x and Pro4x
 
@@ -84,13 +75,6 @@ Eco3x and Pro4x plots let you use your hard drive space and GPU power to the ful
 
 **The Outcome:** 
 This mix lets you use all of your storage space wisely, filling it with Eco3x and Pro4x plots. You end up with a total plot size of about 1.1 ePiB (3x the size of your Eco3x space and 4x your Pro4x space). Your GPU is always active, making sure you're using your resources efficiently.
-
-
-## About the Developer and Contribution Structure
-
-DrPlotter has been a labor of love and dedication that has captivated my attention for over two years. What began as a passion project has transformed into a committed effort to advance the field of Chia plot compression and support the strengths of the Chia blockchain.
-
-To continue this journey, I've stepped away from incorporating a randomized fee or possibly changing fee on farming revenue. Instead, each DrPlot you create contains a small set of developer proofs, which will occasionally be solved just like one of your own proofs. However, these solved developer proofs are then directed to my farmer to create the block, and not yours. Most importantly, all the performance stats I present already factor in these contributions – ensuring that there are no hidden costs. What you see is precisely what you get. This contribution structure is steadfast and unchanging, ensuring that the results you see now will remain consistent in the future. This stability offers ease in planning and peace of mind. A more detailed overview how this works can be seen in the video section: [Note on Developer Fees](https://www.youtube.com/watch?v=hQTV7foIRHo&t=559s)
 
 
 # How it works
@@ -150,7 +134,7 @@ Make sure you meet the minimum requirements above. Then, download the latest .de
 In the command line, run dpkg on your downloaded file, for example:
 
 ```
-sudo dpkg -i drplotter_0.9.0_amd64.deb 
+sudo dpkg -i drplotter_1.0.0_amd64.deb 
 ```
 
 This will install drplotter, drsolver, drserver, and drchia for the harvester in the /usr/bin/ directory.
@@ -169,7 +153,7 @@ sudo dpkg -r drplotter
 To make plots, run:
 
 ```
-drplotter plot -f <your_farmer_key> -c <your_pool_contract_address> -d /your/hdd/directory/ --compression <eco3x or pro4x>
+drplotter plot -f <your_farmer_key> -c <your_pool_contract_address> -d /your/hdd/directory/ --compression <eco3+ or pro4+>
 ```
 
 This will fill the directory with plots. While plotting, you'll see progress and when plots complete, you'll see output like this:
@@ -180,15 +164,15 @@ Location:
   Usage: 1.76 TB used of 12.73 TB total (13%)
   Est. Completion: 467 plots by 2024-01-26 09:25 (2 days, 8 hours)
 
-Plotting File: drplot-pro4x-2024-01-24-00-35-372b8c5b9948587dcf4e6b66565cd382.drplot
+Plotting File: drplot-pro4p-2024-01-24-00-35-372b8c5b9948587dcf4e6b66565cd382.drplot
 
   Progress          Time    ETA
   -----------------------------
   100% ##########  06:51      -
 
-  Size       : 24.01 GiB                   1
-  Proofs     : 4.180.621.852
-  Bits/proof : 49.33 (24.33% of original size)
+  Size       : 22.32 GiB
+  Proofs     : 4.184.342.908
+  Bits/proof : 45.82 (22.59% of original size)
 
 ============ 2024-01-24 00:43:42 ============
 ```
@@ -200,6 +184,8 @@ drplotter -h
 ```
 
 ## Harvesting DrPlots
+
+Note that all the components shown below could be run on the same machine locally, or split across multiple machines or VMs.
 
 ### 1 . Start DrServer
 
@@ -215,8 +201,6 @@ The default port is 8080, and you check it's running by opening a web browser to
 drserver --port 8080
 ```
 
-> [!IMPORTANT]  
-> Keep connected to drplotter.com to support development and avoid a temporary 10% drop in plot rewards. This measure, necessary for developer fee collection, ensures service continuity even if drplotter.com goes down. It's temporary until CHIP-22 integration is complete.
 
 ### 2. Set your DRSERVER_IP_ADDRESS environment variables
 
@@ -263,11 +247,11 @@ Take note of what local ip address your drserver is running on. For every differ
    nano ~/.chia/mainnet/config/config.yaml
    ```
  
-   Look for **farmer_peer:** under the **harvester:** section, and edit the ip to point to your farmer ip.
+   Look for **farmer_peers:** under the **harvester:** section, and edit the ip to point to your farmer ip.
     e.g.
     ``` 
     harvester:
-      farmer_peer:
+      farmer_peers:
         host: <Farmer IP Address>  <--- set to your farmer ip address, e.g. 192.168.1.23
         port: 8447
     ```
@@ -324,7 +308,7 @@ drsolver
 DrSolver will run and connect to the `drserver`. Once connected, it will display your connected harvesters and solvers that are all synced with the `drserver`. Below is an example output:
 
 ```
-                            DrPlotter Solver v0.10.0
+                            DrPlotter Solver v1.0.3
 
 DrPlotter Farm Status
 --------------------------------------------------------------------------------
