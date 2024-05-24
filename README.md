@@ -355,11 +355,15 @@ To take advantage of the remote features of DrServer, for instance, so that you 
 
 First, on your DrServer generate a token:
 
-``drserver --generate-token``
+```
+drserver --generate-token
+```
 
 and you will see output similar to this:
 
-``Generated validation token: SLJNCYo0dsEfpl8nRcuV5qDPWD3sYwAoWJMU9ghzpSEafqGG``
+```
+Generated validation token: SLJNCYo0dsEfpl8nRcuV5qDPWD3sYwAoWJMU9ghzpSEafqGG
+```
 
 Next, run your DrServer with that token:
 
