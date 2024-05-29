@@ -4,9 +4,9 @@
 
 # DrPlotter: Your Go-To for Maximum ROI Chia Farming
 
-DrPlotter is an advanced, energy-efficient GPU plotter, solver, and harvester designed for the Chia Blockchain, with break-through rewards and efficiency optimized for consumer-grade hardware. See the video on the [Introduction to DrPlotter](https://www.youtube.com/watch?v=hQTV7foIRHo&t=3s).
+DrPlotter is an advanced, energy-efficient GPU plotter, solver, and harvester designed for the Chia Blockchain, with break-through rewards and efficiency optimized for consumer-grade hardware.
 
-- **Up to +413% Rewards**: Two compression modes offer a balance between optimal efficiency and optimal cost per eTB for maximum ROI.
+- **Up to +442% Rewards**: Two compression modes offer a balance between optimal efficiency and optimal cost per eTB for maximum ROI.
 - **Enhanced Security**: Relies solely on public farmer keys, letting you safeguard your private keys.
 - **Effortless Remote GPU Use**: Enjoy a streamlined process for submitting proofs and the flexibility to use your GPU remotely with ease.
 - **Supporting the Chia Ecosystem**: By seamlessly integrating with the official Chia Farmers, DrPlotter plays a part in keeping the Chia network strong and decentralized.
@@ -14,7 +14,7 @@ DrPlotter is an advanced, energy-efficient GPU plotter, solver, and harvester de
 Offering Eco3x for enhanced energy efficiency and Pro4x for maximum plot size reduction you can achieve higher ROI than any other solution.
 
 <p align="center" alt="DrPlotter eco3x and pro4x summary">
-  <img src="images/drplotter-plots-summary.png" />
+  <img src="images/drplotter-plots-summary-nodevfee.png" />
 </p>
 
 <sup>1: The 512 plot filter will be active until June 2024. During this period, the capacities supported by the 256 filter will be doubled.</sup>
@@ -34,7 +34,7 @@ Eco3x compression offers an energy-efficient solution for managing chia farms, e
 
 ## The Pro4x Advantage
 
-Pro4x compression significantly reduces hard drive needs for your plots to less than a quarter compared to uncompressed plots, marking a major leap in cost and space savings. By matching your hard drive capacity with your GPU's power, Pro4x achieves unmatched ROI. The table shows that with 4090 GPUs at full capacity, even with the challenging 256 plot filter, you can efficiently run a 1.6 ePiB farm at just 38% the cost of a setup using regular plots. Notably, Pro4x enables over 1 ePiB of plots in a consumer PC case using only 14 hard drives, compared to the 56 drives a large server setup would need, enhancing space utilization, cost-effectiveness, and management simplicity.
+Pro4x compression significantly reduces hard drive needs for your plots to less than a quarter compared to uncompressed plots, marking a major leap in cost and space savings. By matching your hard drive capacity with your GPU's power, Pro4x achieves unmatched ROI. The table shows that with 4090 GPUs at full capacity on the 256 plot filter, you can efficiently run a 880 eTiB farm at just 35% the cost of a setup using regular plots. Notably, Pro4x enables over 1 ePiB of plots in a consumer PC case using only 14 hard drives, compared to the 56 drives a large server setup would need, enhancing space utilization, cost-effectiveness, and management simplicity.
 
 <p align="center" alt="Table comparing pro4x advantages to regular plots">
   <img src="images/pro4x-advantage.png" />
@@ -45,31 +45,22 @@ Pro4x compression significantly reduces hard drive needs for your plots to less 
 ## Strategic Efficiency: Eco3x and Pro4x vs. NoSSD's C15
 In the competitive landscape of chia farming, striking the right balance between energy consumption and cost per reward is key. Chia farming involves substantial initial setup costs but low ongoing expenses. The Eco3x and Pro4x solutions, developed with these economic dynamics in mind, optimize for a slight increase in energy use to significantly reduce the cost per reward across various setups and market conditions, offering a financial advantage.
 
-The performance of these solutions is contrasted with NoSSD's leading C15 plot format under a fixed $10,000 budget. Analysis shows that both Eco3x and Pro4x not only improve chia earnings but do so with an acceptable increase in energy consumption. Specifically, Eco3x delivers an extra 0.10 xch for 4.79 kWh more than C15, while Pro4x adds 0.16 xch for an additional 11.21 kWh.
+The performance of these solutions is contrasted with NoSSD's leading C15 plot format under a fixed $10,000 budget. Analysis shows that both Eco3x and Pro4x not only improve chia earnings but do so with an acceptable increase in energy consumption. Specifically, Eco3x delivers an extra 0.07 xch for 4.79 kWh more than C15, while Pro4x adds 0.10 xch for an additional 11.21 kWh.
 
 <p align="center" alt="DrPlotter Eco3x and Pro4x vs NoSSD C15">
-  <img src="images/Eco3x-Pro4x-vs-NoSSDC15.png" />
+  <img src="images/Eco3x-Pro4x-vs-NoSSDC15-nodevfee.png" />
 </p>
 
 <sub>1: Hardware Cost includes expenses for disks and GPUs, calculated at $16 per installed TB and $1600 for a 4090 GPU. GPU costs are adjusted to utilization—e.g., at 38% utilization, only 38% of the GPU cost is counted. This approach ensures costs are proportionally represented for a fair comparison within a $10,000 investment.</sub>
-<sub>2: For NoSSD a 3.5% is deducted from rewards. Since DrPlotter fees are already incorporated into it's structure there's no need for any additional deductions.</sub>
+<sub>2: For NoSSD a 3.5% fee from NoSSD is deducted from rewards.</sub>
 
 By evaluating the potential xch price against energy costs, it's clear that Eco3x and Pro4x are compelling for those seeking profitability over minimal energy use. For example, if your electricity costs are $0.14 per kWh with XCH priced at $30:
 
 ```
-Eco3x extra earnings - extra energy costs = 0.10 * $30 - 4.79 * $0.14  = +$2.33 vs NoSSD.
-Pro4x extra earnings - extra energy costs = 0.16 * $30 - 11.21 * $0.14 = +$3.23 vs NoSSD.
+Eco3x extra earnings - extra energy costs = 0.07 * $31 - 4.79 * $0.14  = +$1.49 vs NoSSD.
+Pro4x extra earnings - extra energy costs = 0.10 * $31 - 11.21 * $0.14 = +$1.53 vs NoSSD.
 ```
-These figures highlight Pro4x as a strong contender, offering a 44% higher daily return than NoSSD's C15 ($10.62 per day vs $7.39 per day), despite a higher energy consumption.
-
-To enhance your decision-making process, the chart below serves as a guide for evaluating risks and potential returns. For those who prefer a cautious approach, opt for a plot format that remains viable at lower XCH prices. 
-
-<p align="center" alt="DrPlotter Eco3x and Pro4x vs NoSSD C15">
-  <img src="images/Consider-Eco3x-Pro4x-NoSSDC15-kWh.png" />
-</p>
-
-> [!IMPORTANT]  
-> The chart provided is tailored to reflect scenarios involving the use of 4090 GPUs, as detailed in the hardware setup section above.
+These figures highlight Pro4x as a strong contender, offering a 50% higher daily return than NoSSD's C15 ($4.57 profit per day vs $3.04 profit per day), despite a higher energy consumption.
 
 ## Get the Most Out of Your GPU with Eco3x and Pro4x
 
@@ -86,27 +77,20 @@ Eco3x and Pro4x plots let you use your hard drive space and GPU power to the ful
 This mix lets you use all of your storage space wisely, filling it with Eco3x and Pro4x plots. You end up with a total plot size of about 1.1 ePiB (3x the size of your Eco3x space and 4x your Pro4x space). Your GPU is always active, making sure you're using your resources efficiently.
 
 
-## About the Developer and Contribution Structure
-
-DrPlotter has been a labor of love and dedication that has captivated my attention for over two years. What began as a passion project has transformed into a committed effort to advance the field of Chia plot compression and support the strengths of the Chia blockchain.
-
-To continue this journey, I've stepped away from incorporating a randomized fee or possibly changing fee on farming revenue. Instead, each DrPlot you create contains a small set of developer proofs, which will occasionally be solved just like one of your own proofs. However, these solved developer proofs are then directed to my farmer to create the block, and not yours. Most importantly, all the performance stats I present already factor in these contributions – ensuring that there are no hidden costs. What you see is precisely what you get. This contribution structure is steadfast and unchanging, ensuring that the results you see now will remain consistent in the future. This stability offers ease in planning and peace of mind. A more detailed overview how this works can be seen in the video section: [Note on Developer Fees](https://www.youtube.com/watch?v=hQTV7foIRHo&t=559s)
-
-
 # How it works
 
 <p align="center" alt="Diagram of DrPlotter components">
-  <img src="images/drplotter-components.png" />
+  <img src="images/drplotter-solver-harvester-server-farmer.png" />
 </p>
 
 
 **DrPlotter** is the plotting tool that creates Eco3x and Pro4x plots. Given your farmer and pool public keys, it produces "DrPlots" using write-once technology directly to your HDD, typically in 5-7 minutes per plot. No SSD required.
 
-**DrChia harvester**, in line with the Chia harvesting protocol, seamlessly integrates with your existing farmer setup. It reads existing chia supported plots and your new DrPlots. DrPlot entries requiring proof solving are sent to the Solver Server. Once solved, these proofs are relayed back to the DrChia harvester and then passed onto your Chia farmer, ensuring smooth and consistent operation.
+**DrChia Harvester**, in line with the Chia harvesting protocol, seamlessly integrates with your existing farmer setup. It reads existing chia supported plots and your new DrPlots. DrPlot entries requiring proof solving are sent to the DrServer. Once solved, these proofs are relayed back to the DrChia harvester and then passed onto your Chia farmer.
 
-**DrSolver** leverages your GPU power to solve proofs for your plot entries. Using a unique token system, DrSolvers can be deployed in various locations without compromising efficiency or security.
+**DrSolver** leverages your GPU power to solve proofs for your compressed DrPlot entries.
 
-**Solver Server** is vital in enhancing computational efficiency and consistently reducing proof times. It alleviates bottlenecks and manages load during peak periods at signage points for your DrPlots by proportionally allocating compute resources according to DrPlot count, ensuring efficient and equitable proof resolution across the network.
+**DrServer** is the central hub on your local network that connects all your harvesters and DrSolver's together. It efficiently manages and distributes all the tasks needed across all your harvesters and DrSolvers, to ensure a smooth running system for relaying proofs back to your farmer. 
 
 For a more complete overview, see the video [How it works](https://www.youtube.com/watch?v=hQTV7foIRHo&t=463s).
 
@@ -116,25 +100,30 @@ For a more complete overview, see the video [How it works](https://www.youtube.c
 - Make sure you meet the [minimum requirements](#minimum-requirements)
 - Download and [install the software](#installation)
 - [Start plotting](#plotting) with the DrPlotter tool.
-- [Set your client token](#setting-up-your-drplotter_client_token)
-- [Run your DrSolvers](#run-your-drsolver)
-- [Setup and run your DrChia harvester](#setup-and-run-your-drchia-harvester) with your existing chia farmer.
+- [Run your DrSolvers](#1-start-drserver)
+- [Setup and run your DrChia harvester](#3-setup-your-drchia-harvesters) with your existing chia farmer.
 - [Verify your DrPlots are submitting proofs](#verify-your-drplots-are-submitting-proofs)
 
 ## Minimum Requirements
+
 DrPlotter Minimum Requirements:
-- 24GB nvidia 3090 / A5000 / 4090
-- 128GB DDR4 RAM
+- 24GB nvidia 3090 / A5000 / 4090 per instance.
+- 128GB DDR4 RAM per instance.
 - motherboard with a PCIE 4.0 x 16 slot
 - 64 bit processor (onboard GPU a bonus)
 - Ubuntu / Debian based system
 
 DrSolver Minimum Requirements:
-- 24GB nvidia 3090.
+- 64MB RAM per instance.
+- 24GB nvidia 3090 per instance.
 - Ubuntu / Debian based system
 
 DrChia Harvester Minimum Requirements:
 - ~4GB RAM for every 1PiB of raw disk space.
+- Ubuntu / Debian based system
+
+DrServer Minimum Requirements:
+- ~16MB RAM
 - Ubuntu / Debian based system
 
 ## Installation
@@ -144,10 +133,10 @@ Make sure you meet the minimum requirements above. Then, download the latest .de
 In the command line, run dpkg on your downloaded file, for example:
 
 ```
-sudo dpkg -i drplotter_0.12.0_amd64.deb 
+sudo dpkg -i drplotter_1.0.0_amd64.deb 
 ```
 
-This will install drplotter, drsolver, and drchia for the harvester in the /usr/bin/ directory.
+This will install drplotter, drsolver, drserver, and drchia for the harvester in the /usr/bin/ directory.
 
 If at any point you want to remove drplotter, to uninstall run:
 
@@ -162,7 +151,7 @@ sudo dpkg -r drplotter
 To make plots, run:
 
 ```
-drplotter plot -f <your_farmer_key> -c <your_pool_contract_address> -d /your/hdd/directory/ --compression <eco3x or pro4x>
+drplotter plot -f <your_farmer_key> -c <your_pool_contract_address> -d /your/hdd/directory/ --compression <eco3+ or pro4+>
 ```
 
 This will fill the directory with plots. While plotting, you'll see progress and when plots complete, you'll see output like this:
@@ -173,15 +162,15 @@ Location:
   Usage: 1.76 TB used of 12.73 TB total (13%)
   Est. Completion: 467 plots by 2024-01-26 09:25 (2 days, 8 hours)
 
-Plotting File: drplot-pro4x-2024-01-24-00-35-372b8c5b9948587dcf4e6b66565cd382.drplot
+Plotting File: drplot-pro4p-2024-01-24-00-35-372b8c5b9948587dcf4e6b66565cd382.drplot
 
   Progress          Time    ETA
   -----------------------------
   100% ##########  06:51      -
 
-  Size       : 24.01 GiB                   1
-  Proofs     : 4.180.621.852
-  Bits/proof : 49.33 (24.33% of original size)
+  Size       : 22.32 GiB
+  Proofs     : 4.184.342.908
+  Bits/proof : 45.82 (22.59% of original size)
 
 ============ 2024-01-24 00:43:42 ============
 ```
@@ -192,70 +181,137 @@ To see more plotting options, run:
 drplotter -h
 ```
 
-## Setting up your DRPLOTTER_CLIENT_TOKEN
+## Harvesting DrPlots
 
-DrPlotter requires a unique client token for authentication. This token links your drsolvers and harvesters. **Use the same token** across all your machines running drchia harvesters and drsolvers.
+Note that all the components shown below could be run on the same machine locally, or split across multiple machines or VMs.
 
-### 1. Generate your token
+### 1. Start DrServer
 
-Run the following command to generate a new client token:
-```
-drsolver --generate-token
-```
-This command creates a new authentication token. You'll see output similar to this (note that your token will be different):
+DrServer is the central hub on your network that connects all the `drchia harvester` and `drsolver` instances. You only need a single instance of DrServer accessible on your network. Run the following command to start:
 
 ```
-Generated client token: kWq9NXkHQ75zGhebkJzriknBs0IOnDux5kIqOd0aJioM6HSR
+drserver
 ```
- 
-### 2. Set your DRPLOTTER_CLIENT_TOKEN environment variable
+
+The default port is 8080, and you check it's running by opening a web browser to your local ip and port like so: `http://localhost:8080/`. If you want to run on a specific port, use:
+
+```
+drserver --port 8080
+```
+
+
+### 2. Set your DRSERVER_IP_ADDRESS environment variables
+
+Take note of what local ip address your drserver is running on. For every different machine you have running DrPlotter services, set the environment variable `DRSERVER_IP_ADDRESS`.
+
 - **Temporary Setting**: For a temporary setup in a bash shell, use:
      
     ```
-    export DRPLOTTER_CLIENT_TOKEN='Your_Unique_Token'
+    export DRSERVER_IP_ADDRESS='Your_drserver_ip_address:port'
     ```
-    Replace 'Your_Unique_Token' with the token generated in the previous step.
+    Replace 'Your_drserver_ip_address:port' with ip address and port of your machine running drserver. Append the port after a semi-colon to the ip address, e.g. `192.168.0.2:8080` for setting the port to `8080`.
+
 - **Persistent Setup:**
 
   Edit your `.bashrc` file for a more persistent solution:
   ```
   nano ~/.bashrc
   ```
-  Add the following line to the end of the file (with your actual token):
+  Add the following line to the end of the file (with your actual drserver ip address):
   ```
-  export DRPLOTTER_CLIENT_TOKEN='Your_Unique_Token'
+  export DRSERVER_IP_ADDRESS='Your_drserver_ip_address:port'
   ```
   Save and exit, then apply changes with:
   ```
   source ~/.bashrc
   ```
 
-### 3. Verify your token is set
-To verify that your token is set correctly, you can run:
+### 3. Setup your DrChia harvesters
+
+-  If you're on a new install, first run:
+
+   ```
+   drchia init
+   ```
+- Then, you need to copy in your ca certificates from your **farmer machine**, these are usually found at `~/.chia/mainnet/config/ssl/ca`. These let the drchia harvester securely talk with your farmer. Initialize these with your harvester:
+
+   ```
+   drchia init -c /path/to/your/farmers/ca/certificates
+   ``` 
+
+- Edit the chia config file on your harvester. In the example below we use nano:
+
+   ```
+   nano ~/.chia/mainnet/config/config.yaml
+   ```
+ 
+   Look for **farmer_peers:** under the **harvester:** section, and edit the ip to point to your farmer ip.
+    e.g.
+    ``` 
+    harvester:
+      farmer_peers:
+        host: <Farmer IP Address>  <--- set to your farmer ip address, e.g. 192.168.1.23
+        port: 8447
+    ```
+   Don't forget to save your changes.
+
+### 4. Connect your DrChia Harvester
+
+To verify that your machine knows the ip address of your `drserver`, you can run:
 ```
-echo $DRPLOTTER_CLIENT_TOKEN
+echo $DRSERVER_IP_ADDRESS
 ```
-and check that the output matches your token.
-
-> [!CAUTION]
-> Keep your token secure and do not share it in public forums
+and check that the output matches the ip address of your `drserver`.
 
 
-## Run your DrSolver
+Before you run your harvester, let's change the config so that you can see log outputs to check it's working. Run:
 
-Once your DRPLOTTER_CLIENT_TOKEN is set in your environment (see [previous section](#setting-up-your-drplotter_client_token)), run:
+```
+drchia configure --log-level INFO
+```
+And now run:
+
+```
+drchia start harvester -r
+```
+
+If all is well, you can now check your logs in `~/.chia/mainnet/log/debug.log`
+
+If you see logs similar to this:
+
+```
+2024-01-24T01:05:55.731 harvester drplotter               : INFO     Harvesting 1368 drplots with on disk size 36.82 TiB, after decompression 130.58 eTiB, extra rewards 3.55x
+```
+
+Then congrats, your drchia harvester has found your drplots and is now ready to harvest.
+
+You'll also notice there are some warning logs, if you haven't yet setup a DrSolver to use the GPU to decmpress all those proofs. That's what we'll do next.
+
+
+### 5. Connect your DrSolvers
+
+A DrSolver can run on the same system as your `drchia harvester` or the `drserver`, as long as it has it's own dedicated GPU.
+
+Let's first verify that your machine knows the ip address of your `drserver`, you can run:
+```
+echo $DRSERVER_IP_ADDRESS
+```
+and check that the output matches the ip address of your drserver.
+
+If that looks good, then running a drsolver is as simple as:
 ```
 drsolver
 ```
-DrSolver will run and connect to Solver Server. Once connected, it will display your connected harvesters and solvers that are linked using the same client token. Below is an example output:
+
+DrSolver will run and connect to the `drserver`. Once connected, it will display your connected harvesters and solvers that are all synced with the `drserver`. Below is an example output:
 
 ```
-                            DrPlotter Solver v0.12.0
+                            DrPlotter Solver v1.0.3
 
 DrPlotter Farm Status
 --------------------------------------------------------------------------------
   Status: CONNECTED                                             Uptime: 02:23:30
-  Client Token: kWq9NXkHQ75zGheb...
+  DrServer: 192.168.2.44:8080
 
   Total Harvesters: 2                                           Total Solvers: 1
 
@@ -277,89 +333,9 @@ Commands: [Q]uit
 
 While DrSolver is running, monitor the 5-minute and 15-minute "load" indicators to gauge the current capacity usage of your GPU as a percentage of its total capacity. 
 
-## Setup and Run your DrChia Harvester
- 
-On your harvester system, set the DRPLOTTER_CLIENT_TOKEN environment variable to the one you [generated with your DrSolver](#setting-up-your-drplotter_client_token).
-
-### System with Existing Chia Harvester
-
-> [!IMPORTANT]
-> The drchia harvester from version 0.11.0 onwards only supports the latest Chia farmer releases with update 2.2.x or later.
- 
-If you already have a chia setup for your system, you can simply run:
-
-```
-drchia start harvester -r
-```
-
-Make sure to include the -r to stop any previous harvesters and replace them with the drchia harvester.
 
 
-
-### New System as Remote Harvester
-
-> [!IMPORTANT] 
-You must have a chia farmer with version 2.2.x or later in order for `drchia harvester` to connect.
-
-Currently, you need a chia farmer/node on a seperate machine or VM, and connect to it remotely using `drchia`. On the machine for your `drchia` harvester, first run:
-
-   ```
-   drchia init
-   ```
-
-- Then, you need to copy in your ca certificates from your **farmer machine**, these are usually found at `~/.chia/mainnet/config/ssl/ca`. Initialize these with your harvester:
-
-   ```
-   drchia init -c /path/to/your/farmers/ca/certificates
-   ```
-
-- Edit the chia config file on your harvester.
-
-   ```
-   ~/.chia/mainnet/config/config.yaml
-   ```
- 
-   Look for **farmer_peer:** under the **harvester:** section, and edit the ip to point to your farmer ip.
-    e.g.
-    ``` 
-    harvester:
-      farmer_peer:
-        host: <Farmer IP Address>  <--- set to your farmer ip address, e.g. 192.168.1.23
-        port: 8447
-    ```
-   Don't forget to save your changes.
-
-Add any new plot directories you've plotted, as you would with chia's software, e.g.:
-
-```
-drchia plots add -d /your/plots/directory
-```
-
-Before you run your harvester, let's change the config so that you can see log outputs to check it's working. Run:
-
-```
-drchia configure --log-level INFO
-```
-And now run:
-
-```
-drchia start harvester -r
-```
-
-If all is well, you can now check your logs in ~/.chia/mainnet/log/debug.log
-
-If you see logs similar to this:
-
-```
-2024-01-24T01:05:55.731 harvester drplotter               : INFO     Harvesting 1368 drplots with on disk size 36.82 TiB, after decompression 130.58 eTiB, extra rewards 3.55x
-```
-
-Then congrats, your drchia harvester has found your plots and should be harvesting your drplots.
-
-> [!NOTE]
-> If you have not yet connected a drsolver with your same DRPLOTTER_CLIENT_TOKEN, you will see a warning or error message in your harvester logs. Once your drsolver starts running, the harvester will then connect to the server and start sending plots to your solvers.
-
-## Verify your DrPlots are Submitting Proofs
+## 6. Verify your DrPlots are Submitting Proofs
 
 To check your DrPlots are submitting proofs, it's recommended to join a pool and adjust the difficulty setting of your pool plots to the lowest possible value, such as 1. This approach is beneficial for several reasons:
 
@@ -371,15 +347,44 @@ To check your DrPlots are submitting proofs, it's recommended to join a pool and
 
 As a result, you can effectively monitor and ensure that your drplots are being farmed correctly and submitting proofs to the pool as anticipated.
 
-## Using a local DrServer
 
-Once you are comfortable using the token system and seeing your plots submitting proofs, consider adding a local `drserver` for improved performance, better logging, and continous runtime even in the event that drplotter.com goes offline. See the [wiki on using drserver](https://github.com/drnick23/drplotter/wiki/DrServer).
+# Securing your DrServer Remotely
 
-## Join Our Community
+To take advantage of the remote features of DrServer, for instance, so that you can run your DrSolver's also on remote rentable instances, you can secure your server to ensure only your DrChia harvesters and DrSolvers are able to connect using a token system.
 
-For real-time support, questions, or to engage with the DrPlotter community, please join the official DrPlotter Discord channel. Whether you're looking for help, interested in contributing, or just want to discuss Chia farming strategies, it's the perfect place to connect with fellow users and the developer.
+First, on your DrServer generate a token:
 
-👉 [Join the DrPlotter Discord Community](https://discord.gg/Uk3wQ9ztev)
+```
+drserver --generate-token
+```
 
-We look forward to seeing you there!
+and you will see output similar to this:
+
+```
+Generated validation token: SLJNCYo0dsEfpl8nRcuV5qDPWD3sYwAoWJMU9ghzpSEafqGG
+```
+
+Next, run your DrServer with that token:
+
+```
+drserver --token SLJNCYo0dsEfpl8nRcuV5qDPWD3sYwAoWJMU9ghzpSEafqGG    <-- use your own token here
+```
+
+Alternatively, you can set the `DRPLOTTER_CLIENT_TOKEN` as an environment variable, and `drserver` will use that if you don't specify the token directly. 
+
+If no token is passed in the command line or `DRPLOTTER_CLIENT_TOKEN` is not set in your environment for DrServer, then anyone can connect to your DrServer without authenticating.
+
+## Authenticate your DrSolvers
+
+If your DrServer requires a token, use that same token when starting your DrSolver, like so:
+
+```
+drsolver --drserver-ip mydrserver.com:8080 --token [YOUR TOKEN HERE WITHOUT BRACKETS]
+```
+
+Alternatively, if you don't specify a token you can set DRPLOTTER_CLIENT_TOKEN in your environment variables as well.
+
+## Authenticate your DrChia Harvesters
+
+To connect your harvester with your DrServer that requires a token to authenticate, make sure to set the `DRPLOTTER_CLIENT_TOKEN` and the `DRSERVER_IP_ADDRESS` in the environment variables.
 
